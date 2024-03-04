@@ -1,5 +1,7 @@
 import React from 'react';
 import firebase from 'firebase/app';
+import logo from '../assets/googleIcon.jpg'; // Importing logo from local file
+import '../css/signIn.css';
 
 const SignIn = () => {
   const signInWithGoogle = () => {
@@ -20,12 +22,17 @@ const SignIn = () => {
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
         // ...
-        alert(errorMessage);
+
       });
   };
 
   return (
-    <button onClick={signInWithGoogle}>Sign In with Google</button>
+    <div className='signInWrapper'>
+        <div className='signInContainer'>
+            <img className='googleIcon' src={logo} alt="Logo" /> {/* Corrected img tag */}
+            <button className='signInButton' onClick={signInWithGoogle}>Sign In with Google</button>
+        </div>
+    </div>
   );
 };
 

@@ -15,7 +15,7 @@ const auth = firebase.auth();
 const user = firebase.auth().currentUser;
 
 if (user) {
-  // Reference to your users collection in Firestore
+  // Reference to users collection in Firestore
   const userRef = firebase.firestore().collection('users').doc(user.uid);
 
   userRef.get().then((doc) => {
@@ -47,8 +47,10 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      {!user ? <SignIn /> : <><SendMessage /><SignOut /></>}
+    <div className='pageWrapper'>
+
+        {!user ? <SignIn /> : <><SendMessage /><SignOut /></>}
+
     </div>
   );
 };
