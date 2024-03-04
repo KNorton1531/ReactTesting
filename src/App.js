@@ -48,9 +48,7 @@ const App = () => {
 
   return (
     <div className='pageWrapper'>
-
         {!user ? <SignIn /> : <><SendMessage /><SignOut /></>}
-
     </div>
   );
 };
