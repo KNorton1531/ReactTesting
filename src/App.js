@@ -6,6 +6,9 @@ import firebase from './firebase'; // Correct path to your firebase.js
 import SignIn from './components/SignIn'; // Correct path to your SignIn.js
 import SendMessage from './components/SendMessage'; // Correct path to your SendMessage.js
 import SignOut from './components/SignOut'; // Correct path to your SendMessage.js
+import DraggableTest from './components/draggableTest';
+
+
 
 
 const db = firebase.firestore();
@@ -48,7 +51,7 @@ const App = () => {
 
   return (
     <div className='pageWrapper'>
-        {!user ? <SignIn /> : <><SendMessage /><SignOut /></>}
+        {!user ? <SignIn /> : <><DraggableTest /><SignOut /></>}
     </div>
   );
 };
