@@ -33,7 +33,7 @@ class App extends React.Component {
           grid={[25, 25]}
           >
           <div style={{ width: '100px', height: '100px', backgroundColor: 'blue', position: 'absolute', color: 'white', padding: '10px', cursor: 'move' }}>
-            Draggable
+            Default dragging template
           </div>
         </Draggable>
       );
