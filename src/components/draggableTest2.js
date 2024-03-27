@@ -32,8 +32,8 @@ class App extends React.Component {
           bounds={'.pageWrapper'}
           grid={[25, 25]}
           >
-          <div style={{ width: '100px', height: '100px', backgroundColor: 'blue', position: 'absolute', color: 'white', padding: '10px', cursor: 'move' }}>
-            Default dragging template
+          <div id='second' style={{ width: '100px', height: '100px', backgroundColor: 'blue', position: 'absolute', color: 'white', padding: '10px', cursor: 'move' }}>
+            Second Draggable
           </div>
         </Draggable>
       );

@@ -32,9 +32,8 @@ class App extends React.Component {
           bounds={'.pageWrapper'}
           grid={[25, 25]}
           >
-          <div style={{ width: '100px', height: '100px', backgroundColor: 'blue', position: 'absolute', color: 'white', padding: '10px', cursor: 'move' }}>
-            Draggable Test
-            working
+          <div id='first' style={{ width: '100px', height: '100px', backgroundColor: 'blue', position: 'absolute', color: 'white', padding: '10px', cursor: 'move' }}>
+            First Draggable
           </div>
         </Draggable>
       );
