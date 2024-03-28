@@ -1,0 +1,23 @@
+
+.controllerWrapper{
+  border: solid 1px red;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.ambient-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: solid red 1px;
+  width: 300px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.ambient-player .icon {
+  font-size: 24px; /* Icon size */
+}
