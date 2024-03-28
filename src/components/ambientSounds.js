@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import '../css/ambientPlayer.css';
 
@@ -7,12 +7,23 @@ function AmbientSoundPlayer({ soundFile, icon }) {
   const [volume, setVolume] = useState(0.5);
   const audioRef = useRef(new Audio(soundFile));
 
+  // Set up the audio element to loop
+  useEffect(() => {
+    const audio = audioRef.current;
+    audio.loop = true; // This enables the looping
+    audio.volume = volume; // Initialize volume
+
+    // Clean up on component unmount
+    return () => {
+      audio.pause();
+      audio.currentTime = 0; // Reset audio position to the start
+    };
+  }, [volume]); // Executes this effect when component mounts and when volume changes
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
     setIsPlaying(!isPlaying);
     if (!isPlaying) {
-      audio.volume = volume;
       audio.play();
     } else {
       audio.pause();
@@ -42,6 +53,5 @@ function AmbientSoundPlayer({ soundFile, icon }) {
     </div>
   );
 }
-
 
 export default AmbientSoundPlayer;

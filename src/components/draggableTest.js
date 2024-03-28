@@ -34,9 +34,10 @@ class App extends React.Component {
           onStop={this.handleStop}
           bounds={'.pageWrapper'}
           grid={[25, 25]}
+          handle={'.draggableHandle'}
           >
-          <div id='first' style={{ backgroundColor: 'blue', position: 'absolute', color: 'white', padding: '10px', cursor: 'move' }}>
-            First Draggable
+          <div id='first' style={{ backgroundColor: 'blue', position: 'absolute', color: 'white', padding: '10px' }}>
+            <div class="draggableHandle">First Draggable - Drag here</div>
           <AmbientSoundController />
           </div>
         </Draggable>
