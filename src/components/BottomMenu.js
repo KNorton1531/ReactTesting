@@ -50,7 +50,7 @@ const BottomMenu = ({ toggles }) => {
                 }} 
                 onMouseLeave={() => setHovered(false)}
             >
-                {toggles.map(({ id, icon }) => (
+                {toggles.map(({ id, icon, label }) => (
                     <button 
                         key={id} 
                         onClick={() => toggleVisibility(id)}

@@ -6,19 +6,21 @@ import SignOut from './SignOut';
 import '../css/Canvas.css';
 import { FaBeer, FaAddressCard } from 'react-icons/fa';
 import { RiSoundModuleFill } from "react-icons/ri";
+import { AiOutlinePicture } from "react-icons/ai";
+
 
 const Canvas = () => {
   // Define the toggle elements array
   const toggleComponents = [
     { 
         id: 'first', 
-        label: 'First Component',
+        label: 'Ambience',
         icon: <RiSoundModuleFill /> // FontAwesome beer icon
     },
     { 
         id: 'second', 
         label: 'Second Component',
-        icon: <RiSoundModuleFill /> // Material Icons accessibility icon
+        icon: <AiOutlinePicture /> // Material Icons accessibility icon
     },
 ];
 

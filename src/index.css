@@ -2,6 +2,8 @@ body,html{
   padding: 0;
   margin: 0;
   height: 100%;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
 }
 
 #root{
@@ -14,9 +16,4 @@ body,html{
   margin: 0px auto;
   position: relative;
   height: 100%;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
