@@ -6,6 +6,8 @@
   flex-direction: column;
   gap: 20px;
   margin-top: 10px;
+  overflow-y: scroll;
+  height: 85%;
 }
 
 .ambient-player {
@@ -13,7 +15,6 @@
   align-items: center;
   gap: 10px;
   border: solid red 1px;
-  width: 300px;
   padding: 10px;
   justify-content: center;
 }

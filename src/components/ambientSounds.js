@@ -4,36 +4,61 @@ import '../css/ambientPlayer.css';
 
 function AmbientSoundPlayer({ soundFile, icon }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.5);
-  const audioRef = useRef(new Audio(soundFile));
+  const [volume, setVolume] = useState(0.5); // Desired volume level
+  const audioRef = useRef(null);
 
-  // Set up the audio element to loop
   useEffect(() => {
+    audioRef.current = new Audio(soundFile);
     const audio = audioRef.current;
-    audio.loop = true; // This enables the looping
-    audio.volume = volume; // Initialize volume
-
-    // Clean up on component unmount
+    audio.loop = true;
+    
     return () => {
       audio.pause();
-      audio.currentTime = 0; // Reset audio position to the start
+      audio.currentTime = 0;
     };
-  }, [volume]); // Executes this effect when component mounts and when volume changes
+  }, [soundFile]);
+
+  useEffect(() => {
+    // Directly adjusting volume; fade effects are handled separately
+    audioRef.current.volume = volume;
+  }, [volume]);
+
+  const fadeAudio = (targetVolume, callback) => {
+    const audio = audioRef.current;
+    const fadeAmount = 0.2; // Adjust this to make the fade smoother or faster
+    const fadeStep = targetVolume > audio.volume ? fadeAmount : -fadeAmount;
+    const fadeInterval = 200; // Milliseconds per step
+
+    const fade = setInterval(() => {
+      if ((fadeStep < 0 && audio.volume + fadeStep <= targetVolume) || (fadeStep > 0 && audio.volume + fadeStep >= targetVolume)) {
+        clearInterval(fade);
+        audio.volume = targetVolume; // Ensure target volume is reached
+        if (callback) callback();
+      } else {
+        audio.volume += fadeStep;
+      }
+    }, fadeInterval);
+  };
 
   const togglePlayPause = () => {
-    const audio = audioRef.current;
     setIsPlaying(!isPlaying);
     if (!isPlaying) {
-      audio.play();
+      // Fade in
+      audioRef.current.volume = 0; // Start from silence
+      audioRef.current.play();
+      fadeAudio(volume); // Fade to desired volume
     } else {
-      audio.pause();
+      // Fade out and then pause
+      fadeAudio(0, () => {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0; // Optionally reset the audio
+        audioRef.current.volume = volume; // Reset volume for next play
+      });
     }
   };
 
   const handleVolumeChange = (e) => {
-    const newVolume = e.target.value;
-    audioRef.current.volume = newVolume;
-    setVolume(newVolume);
+    setVolume(e.target.value);
   };
 
   return (

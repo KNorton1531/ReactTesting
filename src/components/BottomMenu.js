@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from 'react';
-
-//When creating an element to drag and add to this menu, make sure to include the ID onto the element within the file, not on the component. 
+import '../css/bottomMenu.css';
+import SignOut from './SignOut';
 
 const BottomMenu = ({ toggles }) => {
     const [visibility, setVisibility] = useState({});
+    const [hovered, setHovered] = useState(false);
 
     useEffect(() => {
         const initialVisibility = {};
         toggles.forEach(({ id }) => {
             const storedVisibility = localStorage.getItem(`visibility-${id}`);
-            // Set to false if there's no stored visibility, meaning elements will be hidden by default
             initialVisibility[id] = storedVisibility !== null ? storedVisibility === 'true' : false;
             updateElementVisibility(id, initialVisibility[id]);
         });
-        
         setVisibility(initialVisibility);
-    }, [toggles]); // Dependencies ensure this runs when toggles change
+    }, [toggles]);
+
+    useEffect(() => {
+        if (!hovered) {
+            const timer = setTimeout(() => {
+                document.querySelector('.toggleWrapper').classList.remove('hovered');
+            }, 3000); // 3 seconds delay
+            return () => clearTimeout(timer);
+        }
+    }, [hovered]);
 
     const toggleVisibility = (id) => {
         const newVisibility = !visibility[id];
@@ -28,22 +36,35 @@ const BottomMenu = ({ toggles }) => {
     const updateElementVisibility = (id, isVisible) => {
         const element = document.getElementById(id);
         if (element) {
-            console.log(`Updating element visibility for ${id}, setting display to: ${isVisible ? '' : 'none'}`);
             element.style.display = isVisible ? '' : 'none';
-        } else {
-            console.log(`Element with ID ${id} not found.`);
         }
     };
 
     return (
-        <div className="bottomMenu">
-            {toggles.map(({ id, label }) => (
-                <button key={id} onClick={() => toggleVisibility(id)}>
-                    {visibility[id] ? `Toggle ${label}` : `Toggle ${label}`}
-                </button>
-            ))}
+        <div className='toggleWrapper'>
+            <div 
+                className="bottomMenu" 
+                onMouseEnter={() => { 
+                    setHovered(true); 
+                    document.querySelector('.toggleWrapper').classList.add('hovered');
+                }} 
+                onMouseLeave={() => setHovered(false)}
+            >
+                {toggles.map(({ id, icon }) => (
+                    <button 
+                        key={id} 
+                        onClick={() => toggleVisibility(id)}
+                        className={visibility[id] ? 'buttonVisible' : 'buttonHidden'} // Apply class based on visibility
+                    >
+                        {icon}
+                    </button>
+                ))}
+            </div>
+            <SignOut id="signOut" />
         </div>
     );
+    
+    
 };
 
 export default BottomMenu;
