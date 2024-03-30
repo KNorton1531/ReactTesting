@@ -6,42 +6,77 @@ class BackgroundSelector extends React.Component {
     super(props);
     this.mediaOptions = [
       { 
-        type: 'image',
-        url: 'https://t4.ftcdn.net/jpg/04/61/47/03/360_F_461470323_6TMQSkCCs9XQoTtyer8VCsFypxwRiDGU.jpg',
-        thumbnail: 'https://via.placeholder.com/150'
+        type: 'video',
+        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/study/snow-scene.mp4',
+        thumbnail: '/ReactTesting/thumbnails/studySnow.jpg',
+        title: 'Snow Study'
+      },
+      {
+        type: 'video',
+        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/cottage/cottage-exterior-final.mp4',
+        thumbnail: '/ReactTesting/thumbnails/northenLights.png',
+        title: 'Northen Lights'
+      },
+      {
+        type: 'video',
+        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/plane/plane-night.mp4',
+        thumbnail: '/ReactTesting/thumbnails/planeNight.png',
+        title: 'Plane Night'
       },
       {
         type: 'video',
         url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/Cozy_Studio/Studio_day.mp4',
-        thumbnail: 'https://via.placeholder.com/150'
+        thumbnail: '/ReactTesting/thumbnails/cozyBedroom.png',
+        title: 'Cozy Bedroom'
       },
       {
         type: 'video',
-        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/Cozy_Studio/Studio_day.mp4',
-        thumbnail: 'https://via.placeholder.com/150'
+        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/chill-vibes/LVR%20STARRY%20NIGHT.mp4',
+        thumbnail: '/ReactTesting/thumbnails/chillvibesnight.jpg',
+        title: 'Night Time fireplace'
       },
       {
         type: 'video',
-        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/Cozy_Studio/Studio_day.mp4',
-        thumbnail: 'https://via.placeholder.com/150'
+        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/slowgarden/slow-garden-day.mp4',
+        thumbnail: '/ReactTesting/thumbnails/gardenday.png',
+        title: 'Isometric Garden'
       },
+      {
+        type: 'video',
+        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/slowgarden/slow-garden-night.mp4',
+        thumbnail: '/ReactTesting/thumbnails/gardennight.png',
+        title: 'Isometric Night Garden'
+      },
+      {
+        type: 'video',
+        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/seoul/inside-night.mp4',
+        thumbnail: '/ReactTesting/thumbnails/seoulnight.jpg',
+        title: 'Seoul Night Appartment'
+      },
+      {
+        type: 'video',
+        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/seoul/inside-day.mp4',
+        thumbnail: '/ReactTesting/thumbnails/seoulday.jpg',
+        title: 'Seoul Day Appartment'
+      },
+
     ];
   }
 
   selectBackground = (media) => {
+    console.log('Selected media:', media); // This will log the media object to the console
     this.props.onBackgroundChange(media);
-  };
+};
 
   render() {
     return (
         <div className='backgroundSelectorContainer' id='third'>
-          <div className="backgroundHeader">Background Selection</div>
 
           <div className='backgroundButtons'>
             {this.mediaOptions.map((media, index) => (
               <button key={index} onClick={() => this.selectBackground(media)} className="backgroundOption">
                 <img src={media.thumbnail} alt={`Background ${index + 1}`} className="thumbnail" />
-                Select Background {index + 1} ({media.type})
+                {media.title}
               </button>
             ))}
           </div>

@@ -45,27 +45,27 @@ const Canvas = () => {
     });
 
     useEffect(() => {
-        // Save the current background to local storage whenever it changes
-        localStorage.setItem('savedBackground', JSON.stringify(background));
-      }, [background]);
+      localStorage.setItem('savedBackground', JSON.stringify(background));
+    }, [background]); // Make sure background is in the dependency array
     
-      const handleBackgroundChange = (media) => {
-        setBackground(media);
-      };
+    const handleBackgroundChange = (media) => {
+      setBackground(media);
+    };
+    
 
       return (
         <div className='canvasWrapper'>
           {background.type === 'video' ? (
-            <video autoPlay loop muted playsInline style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, objectFit: 'cover', zIndex: -1 }}>
+            <video key={background.url} autoPlay loop muted playsInline style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, objectFit: 'cover', zIndex: -1 }}>
               <source src={background.url} type="video/mp4" />
             </video>
           ) : (
             <div style={{ backgroundImage: `url(${background.url})`, backgroundSize: 'cover', width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: -1 }}></div>
           )}
-            <DraggableTest id="first" />
-            <DraggableTest2 id="second" />
-            <BottomMenu toggles={toggleComponents} />
-            <BackgroundSelector onBackgroundChange={handleBackgroundChange} />
+          <DraggableTest id="first" />
+          <DraggableTest2 id="second" />
+          <BottomMenu toggles={toggleComponents} />
+          <BackgroundSelector onBackgroundChange={handleBackgroundChange} />
         </div>
       );
     };
