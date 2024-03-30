@@ -25,6 +25,35 @@ const BottomMenu = ({ toggles }) => {
         }
     }, [hovered]);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // Check if the click was inside the toggleWrapper, if so, return early
+            const toggleWrapper = document.querySelector('.toggleWrapper');
+            if (toggleWrapper && toggleWrapper.contains(event.target)) {
+                return;
+            }
+    
+            toggles.forEach(({ id, canCloseOutside }) => {
+                if (canCloseOutside) {
+                    const element = document.getElementById(id);
+                    // Check if the clicked area is not our element and if it's not inside toggleWrapper
+                    if (element && !element.contains(event.target)) {
+                        updateElementVisibility(id, false);
+                        setVisibility(prev => ({ ...prev, [id]: false }));
+                        localStorage.setItem(`visibility-${id}`, 'false');
+                    }
+                }
+            });
+        };
+    
+        // Attach event listener
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            // Clean up event listener
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [toggles, visibility]); // Make sure to include all dependencies used in the effect
+
     const toggleVisibility = (id) => {
         const newVisibility = !visibility[id];
         console.log(`Toggling visibility for ${id}: ${newVisibility}`);
@@ -50,11 +79,11 @@ const BottomMenu = ({ toggles }) => {
                 }} 
                 onMouseLeave={() => setHovered(false)}
             >
-                {toggles.map(({ id, icon, label }) => (
+                {toggles.map(({ id, icon, label, canCloseOutside }) => (
                     <button 
                         key={id} 
                         onClick={() => toggleVisibility(id)}
-                        className={visibility[id] ? 'buttonVisible' : 'buttonHidden'} // Apply class based on visibility
+                        className={visibility[id] ? 'buttonVisible' : 'buttonHidden'}
                     >
                         {icon}
                     </button>
@@ -63,8 +92,6 @@ const BottomMenu = ({ toggles }) => {
             <SignOut id="signOut" />
         </div>
     );
-    
-    
 };
 
 export default BottomMenu;
