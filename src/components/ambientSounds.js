@@ -62,7 +62,10 @@ function AmbientSoundPlayer({ soundFile, icon }) {
   };
 
   return (
-    <div className="ambient-player">
+    <div className="ambient-player" 
+      style={{  opacity: isPlaying ? 1 : 0.5,
+                userSelect: isPlaying ? 'auto' : 'none'
+            }}>
       <div className="icon">{icon}</div>
       <button onClick={togglePlayPause}>
         {isPlaying ? <FaPause /> : <FaPlay />}

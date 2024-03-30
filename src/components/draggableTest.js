@@ -36,7 +36,7 @@ class App extends React.Component {
           grid={[25, 25]}
           handle={'.draggableHandle'}
           >
-          <div id='first' style={{ height: '350px', width: '300px', backgroundColor: 'blue', position: 'absolute', color: 'white', padding: '10px' }}>
+          <div id='first' style={{ borderRadius: '5px', backgroundColor: '#0000009c', position: 'absolute', color: 'white', padding: '10px', border: '1px solid rgb(175 175 175)'}}>
             <div class="draggableHandle">First Draggable - Drag here</div>
           <AmbientSoundController />
           </div>

@@ -1,12 +1,9 @@
 
 .controllerWrapper{
-  border: solid 1px red;
   padding: 5px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-top: 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 85%;
 }
 
@@ -14,11 +11,58 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  border: solid red 1px;
-  padding: 10px;
+  padding: 15px 10px;
   justify-content: center;
+  border-bottom: 1px solid #fff;
+}
+
+.ambient-player button{
+  background: none;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border: solid 1px #fff;
+  border-radius: 3px;
+  margin: 0 10px;
+}
+
+.ambient-player button svg{
+  height: 10px;
+}
+
+.ambient-player:last-child{
+  border-bottom: none;
 }
 
 .ambient-player .icon {
   font-size: 24px; /* Icon size */
+  display: flex;
 }
+
+
+input[type=range] {
+  -webkit-appearance: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0;
+  padding: 0;
+  height: 0.8rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 0;
+  box-shadow: -20rem 0 0 20rem rgb(255, 255, 255);
+}
+input[type=range]::-moz-range-thumb {
+  border: none;
+  width: 0;
+  box-shadow: -20rem 0 0 20rem rgba(255, 255, 255, 0.2);
+}
+

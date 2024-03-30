@@ -22,6 +22,11 @@ const Canvas = () => {
         label: 'Second Component',
         icon: <AiOutlinePicture /> // Material Icons accessibility icon
     },
+    { 
+        id: 'third', 
+        label: 'Effects',
+        icon: <AiOutlinePicture /> // Material Icons accessibility icon
+    },
 ];
 
 
