@@ -22,7 +22,10 @@ const SignOut = () => {
         <h3>Sign Out</h3>
           <p>Are you sure you want to sign out?</p>
           <div className='signoutButtons'>
-            <button onClick={signOut}>Yes</button>
+            <button onClick={() => {
+              console.log('Signing out');
+              signOut();
+            }}>Yes</button>
             <button onClick={toggleConfirmDialog}>No</button>
           </div>
         </div>
@@ -30,6 +33,7 @@ const SignOut = () => {
       document.body
     )
   );
+  
 
   return (
     <>

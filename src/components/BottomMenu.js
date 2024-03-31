@@ -27,9 +27,10 @@ const BottomMenu = ({ toggles }) => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            // Check if the click was inside the toggleWrapper, if so, return early
             const toggleWrapper = document.querySelector('.toggleWrapper');
-            if (toggleWrapper && toggleWrapper.contains(event.target)) {
+            const isDialogClick = event.target.closest('.confirmationDialog'); // Add the appropriate selector for your dialog
+        
+            if (toggleWrapper && toggleWrapper.contains(event.target) || isDialogClick) {
                 return;
             }
     

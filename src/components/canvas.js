@@ -5,11 +5,12 @@ import DraggableTest2 from './draggableTest2';
 import DraggableTest3 from './BackgroundImageSelector';
 import SignOut from './SignOut';
 import '../css/Canvas.css';
-import { FaBeer, FaAddressCard } from 'react-icons/fa';
+import { BiMusic } from "react-icons/bi";
 import { RiSoundModuleFill } from "react-icons/ri";
 import { AiOutlinePicture } from "react-icons/ai";
 import BackgroundSelector from './BackgroundImageSelector'; // Adjust path as necessary
 import WelcomeBanner from './welcomeBanner'; // Adjust path as necessary
+import DraggableYouTubePlayer from './youtubePlayer'; // Adjust path as necessary
 
 
 const Canvas = () => {
@@ -26,6 +27,12 @@ const Canvas = () => {
         icon: <AiOutlinePicture />, // Material Icons accessibility icon
         canCloseOutside: true,
     },
+    { 
+      id: 'youtubePlayer', 
+      label: 'Effects',
+      icon: <BiMusic   />, // Material Icons accessibility icon
+      canCloseOutside: false,
+  },
 ];
 
     const defaultBackground = {
@@ -60,6 +67,7 @@ const Canvas = () => {
           )}
           <WelcomeBanner />
           <DraggableTest id="first" />
+          <DraggableYouTubePlayer id="youtubePlayer"/>
           <BottomMenu toggles={toggleComponents} />
           <BackgroundSelector onBackgroundChange={handleBackgroundChange} />
         </div>

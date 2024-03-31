@@ -33,10 +33,9 @@ class App extends React.Component {
           position={this.state.position} // Changed from defaultPosition to position
           onStop={this.handleStop}
           bounds={'.pageWrapper'}
-          grid={[25, 25]}
           handle={'.draggableHandle'}
           >
-          <div id='first' style={{ borderRadius: '5px', backgroundColor: 'rgb(0 0 0 / 85%)', position: 'absolute', color: 'white', padding: '10px', border: '1px solid rgb(175 175 175)'}}>
+          <div id='first' style={{ borderRadius: '5px', backgroundColor: 'rgb(0 0 0 / 85%)', position: 'absolute', color: 'white', border: '1px solid rgb(175 175 175)'}}>
             <div class="draggableHandle">Ambience mixer - Drag here</div>
           <AmbientSoundController />
           </div>
