@@ -164,7 +164,7 @@ const WelcomeBanner = () => {
 
     // Check for Guy Fawkes Day
     if (isGuyFawkesDayNow) {
-        mainWelcome = "Happy Guy Fawkes Day!";
+        mainWelcome = "Happy Bonfire Night";
         subWelcome = "Remember, remember the fifth of November!";
         return { mainWelcome, subWelcome };
     } else if (isGuyFawkesDaySoon) {
