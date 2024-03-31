@@ -1,0 +1,28 @@
+.welcomeContainer{
+    position: absolute;
+    top: 10px;
+    /* width: 80%; */
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.85);
+    left: 10px;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid rgb(175, 175, 175);
+    padding: 10px 200px 10px 10px;
+    user-select: none;
+}
+
+.welcomeContainer h1{
+    margin: 0;
+    font-weight: 300;
+}
+
+.welcomeContainer h2{
+    margin: 0;
+    font-weight: 300;
+}
+
+.welcomeContainer p{
+    margin: 10px 0 0 0;
+    font-weight: bold;
+}

@@ -9,6 +9,7 @@ import { FaBeer, FaAddressCard } from 'react-icons/fa';
 import { RiSoundModuleFill } from "react-icons/ri";
 import { AiOutlinePicture } from "react-icons/ai";
 import BackgroundSelector from './BackgroundImageSelector'; // Adjust path as necessary
+import WelcomeBanner from './welcomeBanner'; // Adjust path as necessary
 
 
 const Canvas = () => {
@@ -18,11 +19,6 @@ const Canvas = () => {
         id: 'first', 
         label: 'Ambience',
         icon: <RiSoundModuleFill /> // FontAwesome beer icon
-    },
-    { 
-        id: 'second', 
-        label: 'Second Component',
-        icon: <AiOutlinePicture /> // Material Icons accessibility icon
     },
     { 
         id: 'third', 
@@ -62,8 +58,8 @@ const Canvas = () => {
           ) : (
             <div style={{ backgroundImage: `url(${background.url})`, backgroundSize: 'cover', width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: -1 }}></div>
           )}
+          <WelcomeBanner />
           <DraggableTest id="first" />
-          <DraggableTest2 id="second" />
           <BottomMenu toggles={toggleComponents} />
           <BackgroundSelector onBackgroundChange={handleBackgroundChange} />
         </div>

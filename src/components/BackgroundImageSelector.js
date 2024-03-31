@@ -8,7 +8,7 @@ class BackgroundSelector extends React.Component {
       { 
         type: 'video',
         url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/study/snow-scene.mp4',
-        thumbnail: '/ReactTesting/thumbnails/studySnow.jpg',
+        thumbnail: '/ReactTesting/thumbnails/studysnow.jpg',
         title: 'Snow Study'
       },
       {
