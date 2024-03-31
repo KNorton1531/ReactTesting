@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/ReactTesting/static/css/main.a25bc7ac.css",
-    "main.js": "/ReactTesting/static/js/main.d2dbec7a.js",
+    "main.css": "/ReactTesting/static/css/main.9b226342.css",
+    "main.js": "/ReactTesting/static/js/main.d06cda55.js",
     "static/js/453.ed3810f9.chunk.js": "/ReactTesting/static/js/453.ed3810f9.chunk.js",
     "static/media/googleIcon.jpg": "/ReactTesting/static/media/googleIcon.dcb6e6d31a47f8d19bdf.jpg",
     "static/media/logo.svg": "/ReactTesting/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/ReactTesting/index.html",
-    "main.a25bc7ac.css.map": "/ReactTesting/static/css/main.a25bc7ac.css.map",
-    "main.d2dbec7a.js.map": "/ReactTesting/static/js/main.d2dbec7a.js.map",
+    "main.9b226342.css.map": "/ReactTesting/static/css/main.9b226342.css.map",
+    "main.d06cda55.js.map": "/ReactTesting/static/js/main.d06cda55.js.map",
     "453.ed3810f9.chunk.js.map": "/ReactTesting/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a25bc7ac.css",
-    "static/js/main.d2dbec7a.js"
+    "static/css/main.9b226342.css",
+    "static/js/main.d06cda55.js"
   ]
 }
