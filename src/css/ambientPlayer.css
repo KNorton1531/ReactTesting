@@ -1,6 +1,6 @@
 
 .controllerWrapper{
-  padding: 5px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;

@@ -1,0 +1,86 @@
+.effectsLayer{
+    position: fixed; /* or 'absolute' depending on your layout */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10; /* Ensure it's above other content */
+    pointer-events: none;
+
+}
+
+.effectsWrapper{
+    border: solid 1px #fff;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    gap: 20px;
+    position: absolute;
+    border-radius: 5px;
+    overflow: hidden;
+    pointer-events: all;
+}
+
+.effectCategories{
+    padding: 10px;
+    height: 250px;
+    overflow: auto;
+}
+
+.effectCategories::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #000000;
+}
+
+.effectCategories::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #d8d8d8;
+}
+
+.effectCategories::-webkit-scrollbar-thumb
+{
+	background-color: #e0e0e0;
+}
+
+.effectCategories h3{
+    margin: 15px 0px 5px 0;
+}
+
+.effectCategories h3:first-child{
+    margin: 0px 0px 5px 0;
+}
+
+.rainButtons{
+    display: flex;
+    gap: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+}
+
+.rainButtons:last-child{
+    margin-bottom: 0;
+}
+
+.rainButtons button{
+    height: 20px;
+    padding: 2px;
+    border: solid 1px #fff;
+    width: 80px;
+}
+
+.rainButtons button.active {
+    background-color: #4CAF50; /* Green background to indicate active */
+    color: white;
+  }
+
+#Rain .drop{
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background-color: rgb(253, 253, 253);
+    opacity: 0.5;
+  }
+
+  

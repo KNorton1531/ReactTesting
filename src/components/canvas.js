@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import BottomMenu from './BottomMenu'; // Make sure this path is correct
 import DraggableTest from './draggableTest';
 import DraggableTest2 from './draggableTest2';
-import DraggableTest3 from './BackgroundImageSelector';
 import SignOut from './SignOut';
 import '../css/Canvas.css';
 import { BiMusic } from "react-icons/bi";
@@ -33,6 +32,12 @@ const Canvas = () => {
       icon: <BiMusic   />, // Material Icons accessibility icon
       canCloseOutside: false,
   },
+  { 
+    id: 'second', 
+    label: 'Effects',
+    icon: <AiOutlinePicture />, // Material Icons accessibility icon
+    canCloseOutside: false,
+},
 ];
 
     const defaultBackground = {
@@ -67,6 +72,7 @@ const Canvas = () => {
           )}
           <WelcomeBanner />
           <DraggableTest id="first" />
+          <DraggableTest2 id="second" />
           <DraggableYouTubePlayer id="youtubePlayer"/>
           <BottomMenu toggles={toggleComponents} />
           <BackgroundSelector onBackgroundChange={handleBackgroundChange} />
