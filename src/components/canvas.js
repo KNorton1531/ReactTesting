@@ -7,6 +7,7 @@ import '../css/Canvas.css';
 import { BiMusic } from "react-icons/bi";
 import { RiSoundModuleFill } from "react-icons/ri";
 import { AiOutlinePicture } from "react-icons/ai";
+import { BsSnow } from "react-icons/bs";
 import BackgroundSelector from './BackgroundImageSelector'; // Adjust path as necessary
 import WelcomeBanner from './welcomeBanner'; // Adjust path as necessary
 import DraggableYouTubePlayer from './youtubePlayer'; // Adjust path as necessary
@@ -35,7 +36,7 @@ const Canvas = () => {
   { 
     id: 'second', 
     label: 'Effects',
-    icon: <AiOutlinePicture />, // Material Icons accessibility icon
+    icon: <BsSnow />, // Material Icons accessibility icon
     canCloseOutside: false,
 },
 ];

@@ -85,7 +85,7 @@ class App extends React.Component {
             </div>
           </Draggable>
           {this.state.isRaining && <ReactRain numDrops={this.getRainDrops()} />} 
-          {this.state.isSnowing && <Snowfall snowflakeCount={this.getSnowflakes()} />}
+          {this.state.isSnowing && <Snowfall radius={[0.5, 1]} snowflakeCount={this.getSnowflakes()} />}
         </div>
       );
     }
