@@ -8,6 +8,13 @@
     align-items: center;
 }
 
+.youtubeHandle input{
+  background: none;
+  border: solid 1px #fff;
+  border-radius: 2px;
+  color: #fff;
+}
+
 .youtubeHandle svg{
     padding-right: 10px;
 }
@@ -17,7 +24,7 @@
     background: none;
     background-color: #000;
     color: #fff;
-    
+  
 }
 
 select:not(:-internal-select-author-button) {
@@ -138,6 +145,29 @@ select:not(:-internal-select-author-button) {
   #sound-bars.paused > span {
     opacity: 0.2;
     transform: scaleY(0.2);
+  }
+
+  .inputYTLinks{
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #youtubeWatcher{
+    border: solid 1px #fff;
+    width: 400px;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    gap: 20px;
+    position: relative;
+    border-radius: 5px;
+  }
+
+  #youtubeWatcher .error{
+    font-size: 11px;
   }
   
   @keyframes sound-bars-animation {

@@ -11,6 +11,8 @@ import { BsSnow } from "react-icons/bs";
 import BackgroundSelector from './BackgroundImageSelector'; // Adjust path as necessary
 import WelcomeBanner from './welcomeBanner'; // Adjust path as necessary
 import DraggableYouTubePlayer from './youtubePlayer'; // Adjust path as necessary
+import DraggableYouTubeWatcher from './youtubeWatcher';
+import { FiYoutube } from "react-icons/fi";
 
 
 const Canvas = () => {
@@ -38,6 +40,12 @@ const Canvas = () => {
     label: 'Effects',
     icon: <BsSnow />, // Material Icons accessibility icon
     canCloseOutside: false,
+},
+{ 
+  id: 'youtubeWatcher', 
+  label: 'Effects',
+  icon: <FiYoutube />, // Material Icons accessibility icon
+  canCloseOutside: false,
 },
 ];
 
@@ -75,6 +83,7 @@ const Canvas = () => {
           <DraggableTest id="first" />
           <DraggableTest2 id="second" />
           <DraggableYouTubePlayer id="youtubePlayer"/>
+          <DraggableYouTubeWatcher id="youtubeWatcher"/>
           <BottomMenu toggles={toggleComponents} />
           <BackgroundSelector onBackgroundChange={handleBackgroundChange} />
         </div>

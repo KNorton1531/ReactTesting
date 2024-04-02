@@ -52,8 +52,8 @@ class App extends Component {
       const newBounds = {
         left: 0,
         top: 0,
-        right: offsetWidth - 257, // Adjust based on the draggable element's size
-        bottom: offsetHeight - 327, // Adjust based on the draggable element's size
+        right: offsetWidth - 257, 
+        bottom: offsetHeight - 327,
       };
       this.setState({ bounds: newBounds }, this.adjustPositionWithinBounds);
     }
