@@ -231,7 +231,7 @@ select:not(:-internal-select-author-button) {
   }
 
   .draggableIcon{
-    
+    display: flex;
   }
   
   @keyframes sound-bars-animation {

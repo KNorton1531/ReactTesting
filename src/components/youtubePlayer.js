@@ -6,22 +6,35 @@ import { MdOutlineToggleOn, MdOutlineToggleOff } from "react-icons/md";
 import { CiPlay1, CiPause1 } from "react-icons/ci";
 
 function DraggableYouTubePlayer({ id }) {
+
+    const playerWidth = 640; // Set the width of the YouTube player
+    const playerHeight = 390; // Set the height of the YouTube player
+
+    // Function to calculate the centered position
+    const getCenteredPosition = () => {
+        const x = (window.innerWidth - playerWidth) / 2;
+        const y = (window.innerHeight - playerHeight) / 2;
+        return { x, y };
+    };
+
+    const storageKey = `position_${id}`;
+    const savedPosition = JSON.parse(localStorage.getItem(storageKey));
+    const initialPosition = savedPosition || getCenteredPosition();
+
     const [videoId, setVideoId] = useState('HBPtQVzRZUY');
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(100); // Default volume set to 100%
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
     const playerRef = useRef(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const storageKey = `position_${id}`;
+    const [position, setPosition] = useState(initialPosition);
     const visibilityKey = `visibility_${id}`;
 
     useEffect(() => {
-        const savedPosition = JSON.parse(localStorage.getItem(storageKey)) || { x: 0, y: 0 };
+        // Update to use initialPosition if not defined in local storage to handle resize before any drag
         const savedVisibility = JSON.parse(localStorage.getItem(visibilityKey)) !== null ? JSON.parse(localStorage.getItem(visibilityKey)) : true;
-        setPosition(savedPosition);
         setIsVisible(savedVisibility);
-    }, [storageKey, visibilityKey]);
+    }, [visibilityKey]);
 
     // Handle window resize
     useEffect(() => {
