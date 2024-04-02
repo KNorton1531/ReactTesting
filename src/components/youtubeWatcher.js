@@ -99,7 +99,7 @@ function DraggableYouTubeWatcher({ id }) {
         if (newVideoId) {
             setVideoId(newVideoId);
             if (playerRef.current) {
-                playerRef.current.loadVideoById(newVideoId);
+                playerRef.current.loadVideoById(newVideoId+'&hd=1');
             }
         }
         setInputValue('');
