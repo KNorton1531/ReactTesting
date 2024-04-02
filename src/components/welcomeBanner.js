@@ -17,11 +17,16 @@ const WelcomeBanner = () => {
     const dayOfWeek = currentTime.format('dddd');
     const currentDate = currentTime.format('DD-MM'); // Formats date as "DD-MM", e.g., "31-10" for October 31st
 
+    // General Flags
+    const isWeekend = dayOfWeek === "Saturday" || dayOfWeek === "Sunday";
+
     // Holiday flags
     const isHalloweenSoon = currentTime.isBetween(moment('25-10', 'DD-MM'), moment('30-10', 'DD-MM'), 'day', '[]');
     const isHalloweenNow = currentDate === "31-10";
 
     const isChristmasSoon = currentTime.isBetween(moment('20-12', 'DD-MM'), moment('24-12', 'DD-MM'), 'day', '[]');
+    const isDecFirst = currentDate === "01-12";
+    const isChristmasEve = currentDate === "24-12";
     const isChristmasNow = currentDate === "25-12";
 
     const isNewYearsEveSoon = currentTime.isBetween(moment('27-12', 'DD-MM'), moment('30-12', 'DD-MM'), 'day', '[]');
@@ -58,41 +63,105 @@ const WelcomeBanner = () => {
     let mainWelcome = `Welcome, today is ${dayOfWeek}.`;
     let subWelcome = "";
 
-
-    //Defaults
-    if (hour >= 6 && hour < 8) {
-      // Early Morning
-      subWelcome = "Good morning! The early bird gets the worm.";
-    } else if (hour >= 8 && hour < 10) {
-      // Mid Morning
-      subWelcome = "Good morning! Full steam ahead.";
-    } else if (hour >= 10 && hour < 12) {
-      // Late Morning
-      subWelcome = "Good morning! Almost time for a break.";
-    } else if (hour >= 12 && hour < 14) {
-      // Early Afternoon
-      subWelcome = "Good afternoon! Time for lunch?";
-    } else if (hour >= 14 && hour < 16) {
-      // Mid Afternoon
-      subWelcome = "Good afternoon! Keep pushing through.";
-    } else if (hour >= 16 && hour < 18) {
-      // Late Afternoon
-      subWelcome = "Good afternoon! Wrapping up the day.";
-    } else if (hour >= 18 && hour < 20) {
-      // Early Evening
-      mainWelcome = `Welcome, today is ${dayOfWeek}, almost time to start a new week.`;
-      subWelcome = "Good evening! Time to relax.";
-    } else if (hour >= 20 && hour < 22) {
-      // Mid Evening
-      mainWelcome = `Welcome, today is ${dayOfWeek}, time to rest.`;
-      subWelcome = "Good evening! It's getting late, time to wind down.";
-    } else if (hour >= 22 && hour < 24) {
-      // Late Evening
-      subWelcome = "Good night! Time to get some rest.";
-    } else {
-      // Night
-      subWelcome = "It's late! Don't forget to rest.";
+    if (hour === 0) {
+      // Midnight
+      mainWelcome = `Midnight hour`;
+      subWelcome = "Everything is quieter";
+    } else if (hour === 1) {
+      // 1 AM
+      mainWelcome = `Still night`;
+      subWelcome = "The quiet hour, perfect for deep thoughts or deep sleep.";
+    } else if (hour === 2) {
+      // 2 AM
+      mainWelcome = `Night time`;
+      subWelcome = "The world sleeps, and dreams weave their tales.";
+    } else if (hour === 3) {
+      // 3 AM
+      mainWelcome = `Deep night time`;
+      subWelcome = "The darkest part of the night.";
+    } else if (hour === 4) {
+      // 4 AM
+      mainWelcome = `Deep night time`;
+      subWelcome = "Quiet before the dawn, the world is still.";
+    } else if (hour === 5) {
+      // 5 AM
+      mainWelcome = `The sun will be up soon`;
+      subWelcome = "Early risers begin their day, while the world gently wakes.";
+    } else if (hour === 6) {
+      // 6 AM
+      mainWelcome = "Early morning";
+      subWelcome = "The early bird catches the worm.";
+    } else if (hour === 7) {
+      // 7 AM
+      mainWelcome = `Good morning!`;
+      subWelcome = "The day starts for many, breakfast time.";
+    } else if (hour === 8) {
+      // 8 AM
+      mainWelcome = `Good morning!`;
+      subWelcome = "Time to start getting to work";
+    } else if (hour === 9) {
+      // 9 AM
+      mainWelcome = `Good morning!`;
+      subWelcome = "Work and school are in full swing.";
+    } else if (hour === 10) {
+      // 10 AM
+      mainWelcome = `Good morning!`;
+      subWelcome = "Mid-morning - a time for productivity.";
+    } else if (hour === 11) {
+      // 11 AM
+      mainWelcome = `Good morning!`;
+      subWelcome = "Late morning, almost time for a midday break.";
+    } else if (hour === 12) {
+      // Noon
+      mainWelcome = `Afternoon!`;
+      subWelcome = "Midday has arrived. Time for lunch!";
+    } else if (hour === 13) {
+      // 1 PM
+      mainWelcome = `Afternoon!`;
+      subWelcome = "Early afternoon, the day continues.";
+    } else if (hour === 14) {
+      // 2 PM
+      mainWelcome = `Afternoon!`;
+      subWelcome = "Mid-afternoon, a perfect time for a short break.";
+    } else if (hour === 15) {
+      // 3 PM
+      mainWelcome = `Afternoon!`;
+      subWelcome = "The afternoon is well underway.";
+    } else if (hour === 16) {
+      // 4 PM
+      mainWelcome = `Afternoon!`;
+      subWelcome = "Late afternoon, the day begins to wind down.";
+    } else if (hour === 17) {
+      // 5 PM
+      mainWelcome = `Evening!`;
+      subWelcome = "The end of the conventional workday.";
+    } else if (hour === 18) {
+      // 6 PM
+      mainWelcome = `Evening!`;
+      subWelcome = "Early evening, time to transition from work to relaxation.";
+    } else if (hour === 19) {
+      // 7 PM
+      mainWelcome = `Evening!`;
+      subWelcome = "Dinner time for many. The evening is young.";
+    } else if (hour === 20) {
+      // 8 PM
+      mainWelcome = `Evening!`;
+      subWelcome = "Mid-evening. Time for relaxation or evening activities.";
+    } else if (hour === 21) {
+      // 9 PM
+      mainWelcome = `Evening!`;
+      subWelcome = "The night progresses. Time for late evening routines.";
+    } else if (hour === 22) {
+      // 10 PM
+      mainWelcome = `Evening!`;
+      subWelcome = "Late evening. The day winds down further.";
+    } else if (hour === 23) {
+      // 11 PM
+      mainWelcome = `Evening!`;
+      subWelcome = "Almost midnight. The perfect time for reflection or rest.";
     }
+
+    
 
     // Days of the week Overrides
     // Specific adjustments for Fridays

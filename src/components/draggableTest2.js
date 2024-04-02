@@ -15,12 +15,58 @@ class App extends React.Component {
   
       this.state = {
         position: savedPosition,
+        bounds: { left: 0, top: 0, right: 0, bottom: 0 },
         isRaining: false,
         rainIntensity: '', // Possible values: '', 'light', 'normal', 'heavy'
         isSnowing: false,
         snowIntensity: '' // Possible values: '', 'light', 'normal', 'heavy'
+
       };
     }
+
+    componentDidMount() {
+      window.addEventListener('resize', this.handleResize);
+      this.updateBounds(); // Initialize bounds and adjust position if necessary
+    }
+  
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.handleResize);
+    }
+  
+    handleResize = () => {
+      this.updateBounds();
+    };
+  
+    updateBounds = () => {
+      const pageWrapper = document.querySelector('.pageWrapper');
+      if (pageWrapper) {
+        const { offsetWidth, offsetHeight } = pageWrapper;
+        const newBounds = {
+          left: 0,
+          top: 0,
+          right: offsetWidth - 320, // Assuming the draggable element is 100px wide
+          bottom: offsetHeight - 303, // Assuming the draggable element is 100px tall
+        };
+        this.setState({ bounds: newBounds }, this.adjustPositionWithinBounds);
+      }
+    };
+  
+    adjustPositionWithinBounds = () => {
+      const { position, bounds } = this.state;
+      const newPosition = { ...position };
+  
+      // Adjust the position to ensure the element remains within the new bounds
+      if (position.x < bounds.left) newPosition.x = bounds.left;
+      if (position.y < bounds.top) newPosition.y = bounds.top;
+      if (position.x > bounds.right) newPosition.x = bounds.right;
+      if (position.y > bounds.bottom) newPosition.y = bounds.bottom;
+  
+      if (newPosition.x !== position.x || newPosition.y !== position.y) {
+        this.setState({ position: newPosition });
+        const storageKey = `position_${this.props.id}`;
+        localStorage.setItem(storageKey, JSON.stringify(newPosition));
+      }
+    };
   
     handleStop = (e, data) => {
       const position = { x: data.x, y: data.y };
@@ -63,7 +109,7 @@ class App extends React.Component {
           <Draggable
             position={this.state.position}
             onStop={this.handleStop}
-            bounds={'.pageWrapper'}
+            bounds={this.state.bounds}
             handle={'.draggableHandle'}>
             <div id='second' className='effectsWrapper'>
               <div className="draggableHandle">Environment Effects</div>
