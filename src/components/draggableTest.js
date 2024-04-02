@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Draggable from 'react-draggable';
 import AmbientSoundController from './ambientSoundController';
+import { FaExpandArrowsAlt } from "react-icons/fa";
 
 class App extends Component {
   constructor(props) {
@@ -92,7 +93,7 @@ class App extends Component {
         bounds={this.state.bounds}
         handle={'.draggableHandle'}>
         <div id='first' style={{ borderRadius: '5px', backgroundColor: 'rgb(0 0 0 / 85%)', position: 'absolute', color: 'white', border: '1px solid rgb(175 175 175)'}}>
-          <div className="draggableHandle">Ambience mixer - Drag here</div>
+          <div className="draggableHandle">Ambience mixer<div className='draggableIcon'><FaExpandArrowsAlt /></div></div>
           <AmbientSoundController />
         </div>
       </Draggable>

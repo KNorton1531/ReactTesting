@@ -3,26 +3,42 @@ import YouTube, { YouTubeProps } from 'react-youtube';
 import '../css/youtubePlayer.css';
 import Draggable from 'react-draggable';
 import { FaSearch } from "react-icons/fa";
+import { FaArrowsAltV, FaExpandArrowsAlt } from "react-icons/fa";
+
 
 function DraggableYouTubeWatcher({ id }) {
-    const [videoId, setVideoId] = useState('HBPtQVzRZUY');
+
+    const playerWidth = 640; // Set the width of the YouTube player
+    const playerHeight = 390; // Set the height of the YouTube player
+
+    // Function to calculate the centered position
+    const getCenteredPosition = () => {
+        const x = (window.innerWidth - playerWidth) / 2;
+        const y = (window.innerHeight - playerHeight) / 2;
+        return { x, y };
+    };
+
+
+    const storageKey = `position_${id}`;
+    const savedPosition = JSON.parse(localStorage.getItem(storageKey));
+    const initialPosition = savedPosition || getCenteredPosition();
+
+    const [videoId, setVideoId] = useState('');
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(100); // Default volume set to 100%
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
     const playerRef = useRef(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const storageKey = `position_${id}`;
+    const [position, setPosition] = useState(initialPosition);
     const visibilityKey = `visibility_${id}`;
     const [inputValue, setInputValue] = useState('');
     const [isValidLink, setIsValidLink] = useState(false);
 
     useEffect(() => {
-        const savedPosition = JSON.parse(localStorage.getItem(storageKey)) || { x: 0, y: 0 };
+        // Update to use initialPosition if not defined in local storage to handle resize before any drag
         const savedVisibility = JSON.parse(localStorage.getItem(visibilityKey)) !== null ? JSON.parse(localStorage.getItem(visibilityKey)) : true;
-        setPosition(savedPosition);
         setIsVisible(savedVisibility);
-    }, [storageKey, visibilityKey]);
+    }, [visibilityKey]);
 
     // Handle window resize
     useEffect(() => {
@@ -58,7 +74,7 @@ function DraggableYouTubeWatcher({ id }) {
         width: '640',
         playerVars: {
             autoplay: 0,
-            controls: 0,
+            controls: 1,
         },
     };
 
@@ -87,6 +103,7 @@ function DraggableYouTubeWatcher({ id }) {
                 playerRef.current.loadVideoById(newVideoId);
             }
         }
+        setInputValue('');
     };
 
     const handleStop = (e, data) => {
@@ -100,12 +117,12 @@ function DraggableYouTubeWatcher({ id }) {
     return (
         <Draggable position={position} onStop={handleStop} bounds="parent" handle={'.youtubeHandle'}>
             <div className='youtubeWrapper' id='youtubeWatcher'>
-            <div class="youtubeHandle">Youtube Player</div>
+            <div class="youtubeHandle">Youtube Player<div className='draggableIcon'><FaExpandArrowsAlt /></div></div>
                 <div className='youtubeWatcherWrapper'>
                     <YouTube className='youtubePlayer' videoId={videoId} opts={opts} onReady={onPlayerReady} />
                     <div className='inputYTLinks'>
-                    <form onSubmit={handleSubmit} className='inputYTLinks'>
-                        <input type='text' name='videoLink' value={inputValue} onChange={handleInputChange} />
+                    <form autocomplete="off" onSubmit={handleSubmit} className='inputYTLinks'>
+                        <input auto placeholder='Enter Youtube Links' type='text' name='videoLink' value={inputValue} onChange={handleInputChange} />
                         <button type="submit" disabled={!isValidLink || isButtonDisabled}>
                             <FaSearch />
                         </button>
@@ -113,6 +130,9 @@ function DraggableYouTubeWatcher({ id }) {
                     </form>
 
                     </div>
+                </div>
+                <div className="drag-indicator">
+                    <FaArrowsAltV />
                 </div>
             </div>
         </Draggable>

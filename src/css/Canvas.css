@@ -13,6 +13,8 @@
     padding: 5px;
     border: solid rgb(175, 175, 175) 1px;
     border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .draggableHandle:hover{

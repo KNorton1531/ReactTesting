@@ -55,13 +55,20 @@
 
 /* bottomMenu.css */
 .buttonVisible {
-    /* Style for visible state */
     opacity: 1;
+    outline: solid 3px #000;
+    display: flex;
+    align-items: center;
+    border-radius: 20%;
 }
 
 .buttonHidden {
     /* Style for hidden (grayed out) state */
-    opacity: 0.5;
+    opacity: 0.4;
+    outline: solid 3px #fff;
+    display: flex;
+    align-items: center;
+    border-radius: 20%;
 }
 
 .signoutButton svg{

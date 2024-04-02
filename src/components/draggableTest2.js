@@ -5,6 +5,7 @@ import '../css/effects.css';
 import ReactRain from 'react-rain-animation';
 import 'react-rain-animation/lib/style.css'; // Import the CSS for ReactRain
 import Snowfall from 'react-snowfall';
+import { FaExpandArrowsAlt } from "react-icons/fa";
 
 class App extends React.Component {
     constructor(props) {
@@ -127,7 +128,7 @@ class App extends React.Component {
             bounds={this.state.bounds}
             handle={'.draggableHandle'}>
             <div id='second' className='effectsWrapper'>
-              <div className="draggableHandle">Environment Effects</div>
+              <div className="draggableHandle">Environment Effects<div className='draggableIcon'><FaExpandArrowsAlt /></div></div>
                 <div className='effectCategories'>
                   <h3>Rain</h3>
                   <div className='rainButtons'>
