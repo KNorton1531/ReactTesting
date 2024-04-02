@@ -8,10 +8,13 @@ class App extends Component {
     super(props);
 
     const storageKey = `position_${this.props.id}`;
-    const savedPosition = JSON.parse(localStorage.getItem(storageKey)) || { x: 0, y: 0 };
+    const savedPosition = JSON.parse(localStorage.getItem(storageKey));
+
+    // Check if there's a saved position. If not, set the default position to the center of the viewport.
+    const defaultPosition = savedPosition || this.getDefaultPosition();
 
     this.state = {
-      position: savedPosition,
+      position: defaultPosition,
       bounds: { left: 0, top: 0, right: 0, bottom: 0 },
     };
   }
@@ -25,6 +28,19 @@ class App extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
+  getDefaultPosition = () => {
+    // Assuming the draggable element's dimensions are 100x100 pixels.
+    const elementWidth = 257;
+    const elementHeight = 327;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    return {
+      x: (viewportWidth / 2) - (elementWidth / 2),
+      y: (viewportHeight / 2) - (elementHeight / 2),
+    };
+  }
+
   handleResize = () => {
     this.updateBounds();
   };
@@ -36,8 +52,8 @@ class App extends Component {
       const newBounds = {
         left: 0,
         top: 0,
-        right: offsetWidth - 257, // Assuming the draggable element is 100px wide
-        bottom: offsetHeight - 327, // Assuming the draggable element is 100px tall
+        right: offsetWidth - 257, // Adjust based on the draggable element's size
+        bottom: offsetHeight - 327, // Adjust based on the draggable element's size
       };
       this.setState({ bounds: newBounds }, this.adjustPositionWithinBounds);
     }

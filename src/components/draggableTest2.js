@@ -11,10 +11,12 @@ class App extends React.Component {
       super(props);
   
       const storageKey = `position_${this.props.id}`;
-      const savedPosition = JSON.parse(localStorage.getItem(storageKey)) || { x: 0, y: 0 };
+      const savedPosition = JSON.parse(localStorage.getItem(storageKey));
+
+      const defaultPosition = savedPosition || this.getDefaultPosition();
   
       this.state = {
-        position: savedPosition,
+        position: defaultPosition,
         bounds: { left: 0, top: 0, right: 0, bottom: 0 },
         isRaining: false,
         rainIntensity: '', // Possible values: '', 'light', 'normal', 'heavy'
@@ -31,6 +33,19 @@ class App extends React.Component {
   
     componentWillUnmount() {
       window.removeEventListener('resize', this.handleResize);
+    }
+
+    getDefaultPosition = () => {
+      // Assuming the draggable element's dimensions are 100x100 pixels.
+      const elementWidth = 320;
+      const elementHeight = 303;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+  
+      return {
+        x: (viewportWidth / 2) - (elementWidth / 2),
+        y: (viewportHeight / 2) - (elementHeight / 2),
+      };
     }
   
     handleResize = () => {
