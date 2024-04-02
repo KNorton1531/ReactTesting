@@ -51,7 +51,8 @@ const App = () => {
 
   return (
     <div className='pageWrapper'>
-        {!user ? <SignIn /> : <><Canvas /></>}
+      <Canvas />
+        {/* {!user ? <SignIn /> : <><Canvas /></>} */}
     </div>
   );
 };
