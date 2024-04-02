@@ -18,7 +18,6 @@ function DraggableYouTubeWatcher({ id }) {
         return { x, y };
     };
 
-
     const storageKey = `position_${id}`;
     const savedPosition = JSON.parse(localStorage.getItem(storageKey));
     const initialPosition = savedPosition || getCenteredPosition();
