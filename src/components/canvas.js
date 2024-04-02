@@ -42,8 +42,8 @@ const Canvas = () => {
 ];
 
     const defaultBackground = {
-        url: 'https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?size=626&ext=jpg&ga=GA1.1.1887574231.1711756800&semt=sph', // Default background image URL
-        type: 'image', // Default background type
+        url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/cottage/cottage-exterior-final.mp4', // Default background image URL
+        type: 'video', // Default background type
     };
 
     // Initialize background state with the default background
