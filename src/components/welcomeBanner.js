@@ -37,10 +37,9 @@ const WelcomeBanner = () => {
     const isValentinesDaySoon = currentTime.isBetween(moment('10-02', 'DD-MM'), moment('13-02', 'DD-MM'), 'day', '[]');
     const isValentinesDayNow = currentDate === "14-02";
 
-    const isStPatricksDaySoon = currentTime.isBetween(moment('10-03', 'DD-MM'), moment('16-03', 'DD-MM'), 'day', '[]');
     const isStPatricksDayNow = currentDate === "17-03";
 
-    const isGuyFawkesDaySoon = currentTime.isBetween(moment('01-11', 'DD-MM'), moment('04-11', 'DD-MM'), 'day', '[]');
+    const isGuyFawkesDaySoon = currentTime.isBetween(moment('03-11', 'DD-MM'), moment('04-11', 'DD-MM'), 'day', '[]');
     const isGuyFawkesDayNow = currentDate === "05-11";
 
     const isRemembranceDayNow = currentDate === "11-11";
@@ -74,27 +73,27 @@ const WelcomeBanner = () => {
     } else if (hour === 2) {
       // 2 AM
       mainWelcome = `Night time`;
-      subWelcome = "The world sleeps, and dreams weave their tales.";
+      subWelcome = "It's really late, time to think about sleep";
     } else if (hour === 3) {
       // 3 AM
       mainWelcome = `Deep night time`;
-      subWelcome = "The darkest part of the night.";
+      subWelcome = "The darkest part of the night";
     } else if (hour === 4) {
       // 4 AM
       mainWelcome = `Deep night time`;
-      subWelcome = "Quiet before the dawn, the world is still.";
+      subWelcome = "Quiet before sinrise, everything is still";
     } else if (hour === 5) {
       // 5 AM
       mainWelcome = `The sun will be up soon`;
-      subWelcome = "Early risers begin their day, while the world gently wakes.";
+      subWelcome = "Early risers are getting up";
     } else if (hour === 6) {
       // 6 AM
       mainWelcome = "Early morning";
-      subWelcome = "The early bird catches the worm.";
+      subWelcome = "Early risers are getting up";
     } else if (hour === 7) {
       // 7 AM
       mainWelcome = `Good morning!`;
-      subWelcome = "The day starts for many, breakfast time.";
+      subWelcome = "The day is starting, breakfast time";
     } else if (hour === 8) {
       // 8 AM
       mainWelcome = `Good morning!`;
@@ -102,7 +101,7 @@ const WelcomeBanner = () => {
     } else if (hour === 9) {
       // 9 AM
       mainWelcome = `Good morning!`;
-      subWelcome = "Work and school are in full swing.";
+      subWelcome = "Stil warming up";
     } else if (hour === 10) {
       // 10 AM
       mainWelcome = `Good morning!`;
@@ -110,15 +109,15 @@ const WelcomeBanner = () => {
     } else if (hour === 11) {
       // 11 AM
       mainWelcome = `Good morning!`;
-      subWelcome = "Late morning, almost time for a midday break.";
+      subWelcome = "Late morning, almost time for a break.";
     } else if (hour === 12) {
       // Noon
       mainWelcome = `Afternoon!`;
-      subWelcome = "Might be time to look for some lunch";
+      subWelcome = "Might be time to look at getting some lunch";
     } else if (hour === 13) {
       // 1 PM
       mainWelcome = `Afternoon!`;
-      subWelcome = "Early afternoon, the day continues.";
+      subWelcome = "Early afternoon, Well into the day";
     } else if (hour === 14) {
       // 2 PM
       mainWelcome = `Afternoon!`;
@@ -126,35 +125,35 @@ const WelcomeBanner = () => {
     } else if (hour === 15) {
       // 3 PM
       mainWelcome = `Afternoon!`;
-      subWelcome = "The afternoon is well underway.";
+      subWelcome = "Well into the afternoon";
     } else if (hour === 16) {
       // 4 PM
       mainWelcome = `Afternoon!`;
-      subWelcome = "Late afternoon, the day begins to wind down.";
+      subWelcome = "Almost time to get home and relax";
     } else if (hour === 17) {
       // 5 PM
       mainWelcome = `Evening!`;
-      subWelcome = "The end of the conventional workday.";
+      subWelcome = "How's your day gone?";
     } else if (hour === 18) {
       // 6 PM
       mainWelcome = `Evening!`;
-      subWelcome = "Early evening, time to transition from work to relaxation.";
+      subWelcome = "How's your day gone?";
     } else if (hour === 19) {
       // 7 PM
       mainWelcome = `Evening!`;
-      subWelcome = "Dinner time for many. The evening is young.";
+      subWelcome = "Perfect time for a chillout";
     } else if (hour === 20) {
       // 8 PM
       mainWelcome = `Evening!`;
-      subWelcome = "Mid-evening. Time for relaxation or evening activities.";
+      subWelcome = "Perfect time for a chillout";
     } else if (hour === 21) {
       // 9 PM
       mainWelcome = `Evening!`;
-      subWelcome = "The night progresses. Time for late evening routines.";
+      subWelcome = "It's getting late";
     } else if (hour === 22) {
       // 10 PM
       mainWelcome = `Evening!`;
-      subWelcome = "Late evening. The day winds down further.";
+      subWelcome = "Late evening. Time to start winding down";
     } else if (hour === 23) {
       // 11 PM
       mainWelcome = `Evening!`;
@@ -166,11 +165,23 @@ const WelcomeBanner = () => {
     // Days of the week Overrides
     // Specific adjustments for Fridays
     if (dayOfWeek === "Friday") {
-        if (hour >= 17 && hour < 19) {
-        subWelcome = "It's Friday! The weekend is just around the corner.";
+        if (hour >= 15 && hour < 16) {
+          subWelcome = "It's Friday! The weekend is just around the corner.";
         } else if (hour >= 19) {
-        subWelcome = "It's Friday night! Time to relax and enjoy the weekend.";
+          subWelcome = "The weekend begins now";
         }
+    }
+
+    if (dayOfWeek === "Saturday") {
+      if (hour >= 17 && hour < 20) {
+        subWelcome = "It's Saturday Night! Time to relax and enjoy the weekend.";
+      } 
+    }
+
+    if (dayOfWeek === "Sunday") {
+      if (hour >= 17 && hour < 19) {
+        subWelcome = "Sadly the weekend is almost over";
+      }
     }
 
     // Holiday Overrides
@@ -226,9 +237,6 @@ const WelcomeBanner = () => {
         mainWelcome = "Happy St. Patrick's Day!";
         subWelcome = "May the luck of the Irish be with you.";
         return { mainWelcome, subWelcome };
-    } else if (isStPatricksDaySoon) {
-        mainWelcome = "St. Patrick's Day is nearly here!";
-        subWelcome = "Time to celebrate with green!";
     }
 
     // Check for Guy Fawkes Day
