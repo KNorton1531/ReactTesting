@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const WelcomeBanner = () => {
   const [currentTime, setCurrentTime] = useState(moment());
-  const [userName, setUserName] = useState(""); // State to store the user's name
+  const [userDetails, setUserDetails] = useState({ firstName: "" });
 
   useEffect(() => {
     // Update the time every second
@@ -13,7 +13,6 @@ const WelcomeBanner = () => {
       setCurrentTime(moment());
     }, 1000);
 
-    // Fetch user information from Firestore
     const fetchUserData = async () => {
       const user = firebase.auth().currentUser;
       if (user) {
@@ -21,8 +20,11 @@ const WelcomeBanner = () => {
         try {
           const doc = await userRef.get();
           if (doc.exists) {
-            // Assuming the user's name is stored under a 'name' field
-            setUserName(doc.data().firstName);
+            // Use setUserDetails to update the first name in context
+            setUserDetails(previousDetails => ({
+              ...previousDetails,
+              firstName: doc.data().firstName
+            }));
           } else {
             console.log("No such document!");
           }
@@ -35,7 +37,7 @@ const WelcomeBanner = () => {
     fetchUserData();
 
     return () => clearInterval(timer);
-  }, []); // The empty array ensures this effect runs once after the initial render
+  }, []); // Dependencies array is empty to run once after initial render
 
 
 
@@ -88,10 +90,11 @@ const WelcomeBanner = () => {
 
     let mainWelcome = `Welcome, today is ${dayOfWeek}.`;
     let subWelcome = "";
+    let userNameValue = userDetails.firstName ? ', ' + userDetails.firstName : '';
 
     if (hour === 0) {
       // Midnight
-      mainWelcome = `Midnight hour`;
+      mainWelcome = `It's midnight hour${userNameValue}`;
       subWelcome = "Everything is quieter";
     } else if (hour === 1) {
       // 1 AM
@@ -103,8 +106,8 @@ const WelcomeBanner = () => {
       subWelcome = "It's really late, time to think about sleep";
     } else if (hour === 3) {
       // 3 AM
-      mainWelcome = `Deep night time`;
-      subWelcome = "The darkest part of the night";
+      mainWelcome = `Evening${userNameValue}`;
+      subWelcome = "It's the dead of the night";
     } else if (hour === 4) {
       // 4 AM
       mainWelcome = `Deep night time`;
