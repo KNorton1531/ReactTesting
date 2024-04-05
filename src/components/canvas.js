@@ -14,7 +14,8 @@ import DraggableYouTubePlayer from './youtubePlayer'; // Adjust path as necessar
 import DraggableYouTubeWatcher from './youtubeWatcher';
 import Settings from './settings';
 import { FiYoutube } from "react-icons/fi";
-import { IoSettingsOutline } from "react-icons/io5";
+import { HiOutlinePaintBrush } from "react-icons/hi2";
+
 
 
 const Canvas = () => {
@@ -24,12 +25,6 @@ const Canvas = () => {
         id: 'first', 
         label: 'Ambience',
         icon: <RiSoundModuleFill /> // FontAwesome beer icon
-    },
-    { 
-        id: 'third', 
-        label: 'Effects',
-        icon: <AiOutlinePicture />, // Material Icons accessibility icon
-        canCloseOutside: true,
     },
     { 
       id: 'youtubePlayer', 
@@ -52,9 +47,8 @@ const Canvas = () => {
 { 
   id: 'Settings', 
   label: 'Settings',
-  icon: <IoSettingsOutline />, // Material Icons accessibility icon
+  icon: <HiOutlinePaintBrush />, // Material Icons accessibility icon
   canCloseOutside: true,
-  closeID: 'close-settings',
 },
 ];
 
@@ -74,6 +68,7 @@ const Canvas = () => {
       localStorage.setItem('savedBackground', JSON.stringify(background));
     }, [background]); // Make sure background is in the dependency array
     
+    
     const handleBackgroundChange = (media) => {
       setBackground(media);
     };
@@ -88,14 +83,14 @@ const Canvas = () => {
           ) : (
             <div style={{ backgroundImage: `url(${background.url})`, backgroundSize: 'cover', width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: -1 }}></div>
           )}
+          
           <WelcomeBanner />
           <DraggableTest id="first" />
           <DraggableTest2 id="second" />
           <DraggableYouTubePlayer id="youtubePlayer"/>
           <DraggableYouTubeWatcher id="youtubeWatcher"/>
-          <Settings id="Settings"/>
+          <Settings id="Settings" onBackgroundChange={handleBackgroundChange} />
           <BottomMenu toggles={toggleComponents} />
-          <BackgroundSelector onBackgroundChange={handleBackgroundChange} />
         </div>
       );
     };

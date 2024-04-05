@@ -14,28 +14,34 @@
 }
 
 .settingsWrapper h3{
-    margin-top: 0;
+    margin: 0;
     font-weight: 300;
     font-size: 1.8rem;
-    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+}
+
+.settingsWrapper h3 p{
+    margin: 0;
+    font-size: 0.8rem;
+    margin-left: 20px;
 }
 
 .settingsLabel {
-    margin: 20px 0 10px 0;
+    margin: 10px 0 10px 0;
     font-weight: bold;
 }
 
 .userDetails{
     border-bottom: 1px solid rgb(175, 175, 175);
-    padding: 20px;
+    padding: 20px 0;
     color: #000;
 }
 
 .userDetails form{
     display: flex;
-    align-items: center;
+    align-items: stretch;
 }
 
 .settingsValue{
@@ -45,13 +51,14 @@
 .settingsValueWrapper{
     display: flex;
     align-items: center;
+    padding-left: 10px;
 }
 
 .userDetails button{
     margin-left: 20px;
     border-radius: 3px;
     padding: 1px 3px;
-    width: 40px;
+    width: 28px;
 }
 
 .userDetails button svg{
@@ -68,7 +75,7 @@
 }
 
 .userDetails input{
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .userDetails .editButton{

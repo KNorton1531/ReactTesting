@@ -3,6 +3,8 @@ import firebase from '../firebase'; // Adjust the path as needed
 import '../css/settings.css';
 import { IoMdClose, IoMdCreate } from "react-icons/io"; // Assuming you use React Icons for the edit icon
 import { FaRegCheckCircle } from "react-icons/fa";
+import BackgroundSelector from './BackgroundImageSelector'; // Adjust path as necessary
+
 
 class Settings extends React.Component {
   constructor(props) {
@@ -80,9 +82,11 @@ class Settings extends React.Component {
 
   render() {
     const { firstName, isEditing } = this.state;
+    const { onBackgroundChange } = this.props; // Destructure to get the method passed as a prop
+    
     return (
         <div className='settingsWrapper' id='Settings'>
-            <h3>Settings</h3>
+            <h3>Settings<p>Click outside of menu to close</p></h3>
             <div className='userDetails'>
                 <p className='settingsLabel'>First Name</p>
                 {isEditing ? (
@@ -97,7 +101,8 @@ class Settings extends React.Component {
                   </div>
                 )}
             </div>
-            {/* Other settings fields */}
+            <p className='settingsLabel'>Change Background</p>
+            <BackgroundSelector onBackgroundChange={onBackgroundChange} />
         </div>
     );
   }

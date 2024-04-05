@@ -6,6 +6,18 @@ const BottomMenu = ({ toggles }) => {
     const [visibility, setVisibility] = useState({});
     const [hovered, setHovered] = useState(false);
 
+
+    useEffect(() => {
+        // Initial setup based on localStorage or default visibility
+        const initialVisibility = {};
+        toggles.forEach(({ id }) => {
+            const storedVisibility = localStorage.getItem(`visibility-${id}`);
+            initialVisibility[id] = storedVisibility !== null ? storedVisibility === 'true' : true;
+        });
+        setVisibility(initialVisibility);
+    }, [toggles]);
+
+
     useEffect(() => {
         const initialVisibility = {};
         toggles.forEach(({ id }) => {
@@ -33,7 +45,7 @@ const BottomMenu = ({ toggles }) => {
             if (toggleWrapper && toggleWrapper.contains(event.target) || isDialogClick) {
                 return;
             }
-    
+
             toggles.forEach(({ id, canCloseOutside }) => {
                 if (canCloseOutside) {
                     const element = document.getElementById(id);
@@ -68,7 +80,7 @@ const BottomMenu = ({ toggles }) => {
         if (element) {
             element.style.display = isVisible ? '' : 'none';
         }
-    };
+    }; 
 
     return (
         <div className='toggleWrapper'>

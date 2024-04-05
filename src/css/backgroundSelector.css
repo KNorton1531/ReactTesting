@@ -1,16 +1,5 @@
 .backgroundSelectorContainer{
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.85);
-    border: 1px solid rgb(175, 175, 175);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 50%;
-    width: 350px;
-    color: #fff;
-    padding: 10px 20px 10px 20px;
-    overflow-y: auto;
+
 }
 
 .backgroundSelectorContainer::-webkit-scrollbar-track
@@ -36,6 +25,7 @@
     align-items: center;
     gap: 10px;
     border-bottom: #fff solid 1px;
+    width: 40%;
 }
 
 .backgroundOption:hover{
@@ -55,7 +45,8 @@
 
 .backgroundButtons{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgb(175, 175, 175);
 }
 
 .backgroundHeader{
