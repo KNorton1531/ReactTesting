@@ -24,7 +24,10 @@
     background: none;
     background-color: #000;
     color: #fff;
-  
+}
+
+.youtubeHandle select *{
+  background-color: #000;
 }
 
 select:not(:-internal-select-author-button) {
@@ -69,6 +72,10 @@ select:not(:-internal-select-author-button) {
     border-radius: 5px 5px 0 0;
 }
 
+.youtubeWatcherWrapper{
+  height: 100%;
+}
+
 .youtubeWatcherWrapper iframe{
   aspect-ratio: 16 / 9;
   width: 100%;
@@ -76,7 +83,7 @@ select:not(:-internal-select-author-button) {
 }
 
 .youtubePlayer{
-
+  height: calc(100% - 67px);;
 }
 
 .ytPlayPause{

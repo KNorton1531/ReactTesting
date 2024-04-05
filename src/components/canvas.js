@@ -12,7 +12,9 @@ import BackgroundSelector from './BackgroundImageSelector'; // Adjust path as ne
 import WelcomeBanner from './welcomeBanner'; // Adjust path as necessary
 import DraggableYouTubePlayer from './youtubePlayer'; // Adjust path as necessary
 import DraggableYouTubeWatcher from './youtubeWatcher';
+import Settings from './settings';
 import { FiYoutube } from "react-icons/fi";
+import { IoSettingsOutline } from "react-icons/io5";
 
 
 const Canvas = () => {
@@ -46,6 +48,13 @@ const Canvas = () => {
   label: 'Effects',
   icon: <FiYoutube />, // Material Icons accessibility icon
   canCloseOutside: false,
+},
+{ 
+  id: 'Settings', 
+  label: 'Settings',
+  icon: <IoSettingsOutline />, // Material Icons accessibility icon
+  canCloseOutside: true,
+  closeID: 'close-settings',
 },
 ];
 
@@ -84,6 +93,7 @@ const Canvas = () => {
           <DraggableTest2 id="second" />
           <DraggableYouTubePlayer id="youtubePlayer"/>
           <DraggableYouTubeWatcher id="youtubeWatcher"/>
+          <Settings id="Settings"/>
           <BottomMenu toggles={toggleComponents} />
           <BackgroundSelector onBackgroundChange={handleBackgroundChange} />
         </div>

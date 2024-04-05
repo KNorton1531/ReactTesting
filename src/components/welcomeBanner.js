@@ -1,16 +1,43 @@
 import React, { useState, useEffect } from 'react';
+import firebase from '../firebase'; // Adjust the path as needed
 import '../css/welcomeContainer.css';
 import moment from 'moment';
 
 const WelcomeBanner = () => {
   const [currentTime, setCurrentTime] = useState(moment());
+  const [userName, setUserName] = useState(""); // State to store the user's name
 
   useEffect(() => {
+    // Update the time every second
     const timer = setInterval(() => {
       setCurrentTime(moment());
-    }, 1000); // Update the time every second
+    }, 1000);
+
+    // Fetch user information from Firestore
+    const fetchUserData = async () => {
+      const user = firebase.auth().currentUser;
+      if (user) {
+        const userRef = firebase.firestore().collection('users').doc(user.uid);
+        try {
+          const doc = await userRef.get();
+          if (doc.exists) {
+            // Assuming the user's name is stored under a 'name' field
+            setUserName(doc.data().firstName);
+          } else {
+            console.log("No such document!");
+          }
+        } catch (error) {
+          console.log("Error getting document:", error);
+        }
+      }
+    };
+
+    fetchUserData();
+
     return () => clearInterval(timer);
-  }, []);
+  }, []); // The empty array ensures this effect runs once after the initial render
+
+
 
   const getWelcomeMessages = () => {
     const hour = currentTime.hour();

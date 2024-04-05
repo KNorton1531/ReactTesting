@@ -123,7 +123,12 @@ function DraggableYouTubePlayer({ id }) {
             <div class="youtubeHandle">
                 <select onChange={handleChange} value={videoId} disabled={isButtonDisabled}>
                     <option value="HBPtQVzRZUY">Chill Radio</option>
-                    <option value="jfKfPfyJRdk">Live Stream 2</option>
+                    <option value="jfKfPfyJRdk">Lofi Girl</option>
+                    <option value="erUTqlcsDJI">LO:FI</option>
+                    <option value="Hmdx9EIQCjk">Chillhop Rainy Night</option>
+                    <option value="K5hDjd1M">Video Game Lofi</option>
+                    <option value="5yx6BWlEVcY">Chillhop Jazzy</option>
+                    <option value="35kwlY_RR08">Coffee Shop Jazz</option>
                     {/* Additional options */}
                 </select>
                 <button onClick={toggleVisibility}>

@@ -7,6 +7,7 @@ import SignIn from './components/SignIn'; // Correct path to your SignIn.js
 import SendMessage from './components/SendMessage'; // Correct path to your SendMessage.js
 import SignOut from './components/SignOut'; // Correct path to your SendMessage.js
 import Canvas from './components/canvas';
+import { UserProvider } from './components/UserContext'; // Adjust the path as needed
 
 
 
@@ -51,8 +52,9 @@ const App = () => {
 
   return (
     <div className='pageWrapper'>
-      <Canvas />
-        {/* {!user ? <SignIn /> : <><Canvas /></>} */}
+      <UserProvider>
+        {!user ? <SignIn /> : <><Canvas /></>}
+      </UserProvider>
     </div>
   );
 };
