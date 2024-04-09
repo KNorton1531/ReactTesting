@@ -154,11 +154,11 @@ const WelcomeBanner = () => {
       subWelcome = "Mid-afternoon, a perfect time for a short break.";
     } else if (hour === 15) {
       // 3 PM
-      mainWelcome = `Afternoon!`;
+      mainWelcome = `Afternoon${userNameValue}`;
       subWelcome = "Well into the afternoon";
     } else if (hour === 16) {
       // 4 PM
-      mainWelcome = `Afternoon!`;
+      mainWelcome = `Afternoon${userNameValue}`;
       subWelcome = "Almost time to get home and relax";
     } else if (hour === 17) {
       // 5 PM

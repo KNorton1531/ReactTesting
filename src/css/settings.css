@@ -37,6 +37,8 @@
     border-bottom: 1px solid rgb(175, 175, 175);
     padding: 20px 0;
     color: #000;
+    display: flex;
+    justify-content: space-between;
 }
 
 .userDetails form{

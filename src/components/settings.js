@@ -4,6 +4,7 @@ import '../css/settings.css';
 import { IoMdClose, IoMdCreate } from "react-icons/io"; // Assuming you use React Icons for the edit icon
 import { FaRegCheckCircle } from "react-icons/fa";
 import BackgroundSelector from './BackgroundImageSelector'; // Adjust path as necessary
+import GeoCodeFromPostcode from './geocode';
 
 
 class Settings extends React.Component {
@@ -86,8 +87,10 @@ class Settings extends React.Component {
     
     return (
         <div className='settingsWrapper' id='Settings'>
-            <h3>Settings<p>Click outside of menu to close</p></h3>
+            <h3>Preferences<p>Click outside of menu to close</p></h3>
             <div className='userDetails'>
+
+            <div className='userDetailsField'>
                 <p className='settingsLabel'>First Name</p>
                 {isEditing ? (
                   <form onSubmit={this.handleSubmit} autoComplete="off">
@@ -99,7 +102,15 @@ class Settings extends React.Component {
                     <span className='settingsValue'>{firstName}</span>
                     <button className='editButton' onClick={this.toggleEdit}><IoMdCreate /></button>
                   </div>
+                  
                 )}
+            </div>
+
+            <div className='userDetailsField'>
+            <p className='settingsLabel'>Update Weather Location</p>
+                <GeoCodeFromPostcode></GeoCodeFromPostcode>
+            </div>
+
             </div>
             <p className='settingsLabel'>Change Background</p>
             <BackgroundSelector onBackgroundChange={onBackgroundChange} />

@@ -13,6 +13,7 @@ import WelcomeBanner from './welcomeBanner'; // Adjust path as necessary
 import DraggableYouTubePlayer from './youtubePlayer'; // Adjust path as necessary
 import DraggableYouTubeWatcher from './youtubeWatcher';
 import Settings from './settings';
+import GeoCodeFromPostcode from './geocode';
 import { FiYoutube } from "react-icons/fi";
 import { HiOutlinePaintBrush } from "react-icons/hi2";
 
@@ -91,6 +92,7 @@ const Canvas = () => {
           <DraggableYouTubeWatcher id="youtubeWatcher"/>
           <Settings id="Settings" onBackgroundChange={handleBackgroundChange} />
           <BottomMenu toggles={toggleComponents} />
+
         </div>
       );
     };
