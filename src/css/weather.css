@@ -1,0 +1,20 @@
+.weatherWrapper{
+    border: solid 1px #fff;
+    width: 300px;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    gap: 20px;
+    position: absolute;
+    border-radius: 5px;
+}
+
+.weatherHandle{
+    padding: 5px;
+    border: solid rgb(175, 175, 175) 1px;
+    border-radius: 3px;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

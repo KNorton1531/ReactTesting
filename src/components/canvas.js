@@ -16,6 +16,8 @@ import Settings from './settings';
 import GeoCodeFromPostcode from './geocode';
 import { FiYoutube } from "react-icons/fi";
 import { HiOutlinePaintBrush } from "react-icons/hi2";
+import WeatherApp from './WeatherApp';
+import { IoCloudyNightOutline } from "react-icons/io5";
 
 
 
@@ -43,6 +45,12 @@ const Canvas = () => {
   id: 'youtubeWatcher', 
   label: 'Effects',
   icon: <FiYoutube />, // Material Icons accessibility icon
+  canCloseOutside: false,
+},
+{ 
+  id: 'WeatherApp', 
+  label: 'WeatherApp',
+  icon: <IoCloudyNightOutline   />, // Material Icons accessibility icon
   canCloseOutside: false,
 },
 { 
@@ -90,6 +98,7 @@ const Canvas = () => {
           <DraggableTest2 id="second" />
           <DraggableYouTubePlayer id="youtubePlayer"/>
           <DraggableYouTubeWatcher id="youtubeWatcher"/>
+          <WeatherApp />
           <Settings id="Settings" onBackgroundChange={handleBackgroundChange} />
           <BottomMenu toggles={toggleComponents} />
 
