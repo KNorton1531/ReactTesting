@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ReactWeather, { useOpenWeather } from 'react-open-weather';
 import Draggable from 'react-draggable';
 import '../css/weather.css';
+import axios from 'axios';  // Add this for making API requests
+import { format, parseISO } from 'date-fns';
 
 
 function WeatherApp({ id }) {
@@ -9,12 +10,42 @@ function WeatherApp({ id }) {
     const playerWidth = 640; // Set the width of the YouTube player
     const playerHeight = 390; // Set the height of the YouTube player
 
+    const apiKey = '70f8e11869e0910ef071d9b3cffd70cb'; // Be sure to replace with your actual API key
+    const [weatherData, setWeatherData] = useState(null);
+    const [currentWeather, setCurrentWeather] = useState(null);;
+
     // Function to calculate the centered position
     const getCenteredPosition = () => {
         const x = (window.innerWidth - playerWidth) / 2;
         const y = (window.innerHeight - playerHeight) / 2;
         return { x, y };
     };
+
+    useEffect(() => {
+        const lat = '53.78395';
+        const lon = '-2.89291';
+        const fetchWeatherData = async () => {
+            const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&cnt=4`;
+            const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+            try {
+                const [forecastResponse, currentResponse] = await Promise.all([
+                    axios.get(urlForecast),
+                    axios.get(urlCurrent)
+                ]);
+                setWeatherData(forecastResponse.data);
+                setCurrentWeather(currentResponse.data);
+
+                console.log(currentResponse.data);
+                console.log(forecastResponse.data);
+            } catch (error) {
+                console.error('Failed to fetch weather data:', error);
+            }
+        };
+
+        fetchWeatherData();
+    }, [id]);  // Dependency array with id ensures that data is refetched if the id changes
+
 
     const storageKey = `position_${id}`;
     const savedPosition = JSON.parse(localStorage.getItem(storageKey));
@@ -62,13 +93,55 @@ function WeatherApp({ id }) {
         localStorage.setItem(storageKey, JSON.stringify(newPosition));
     };
 
+    function capitalizeFirstLetter(string) {
+        if (!string) return '';
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    
+
     return (
         <Draggable position={position} onStop={handleStop} bounds="parent" handle={'.weatherHandle'}>
             <div className='weatherWrapper' id='WeatherApp'>
             <div class="weatherHandle">
-                Handle
             </div>
-            
+            {currentWeather ? (
+               
+            <div className='currentContainer'>
+                <div className='currentInformation'>
+                    <h4>{currentWeather.name}</h4>
+                    <h4>{Math.round(currentWeather.main.temp)}°C</h4>
+                    <h4>{Math.round(currentWeather.main.temp_max)}° / {Math.round(currentWeather.main.temp_min)}°C</h4>
+                    <h4>{capitalizeFirstLetter(currentWeather.weather[0].description)}</h4>
+                </div>
+                <div className='currentIcon'>{currentWeather.weather[0].icon}</div>
+            </div>
+
+            ) : 'Loading Current Weather...'}
+            {weatherData ? (
+
+            <div className='futureContainer'>
+                <div className='weatherItem'>
+                {weatherData.list[0].weather[0].description}
+                </div>
+
+                <div className='weatherItem'>
+
+                </div>
+
+                <div className='weatherItem'>
+
+                </div>
+
+                <div className='weatherItem'>
+
+                </div>
+
+                <div className='weatherItem'>
+
+                </div>
+            </div>
+           
+            ) : 'Loading Forecast...'}
             </div>
         </Draggable>
     );
