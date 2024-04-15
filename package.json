@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://react-testing-69h6spnxu-knorton1531s-projects.vercel.app/" ,
   "dependencies": {
     "@geoapify/geocoder-autocomplete": "^2.0.1",
     "@geoapify/react-geocoder-autocomplete": "^2.0.0",
