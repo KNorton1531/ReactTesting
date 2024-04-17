@@ -8,16 +8,19 @@ class GeoCodeFromPostcode extends React.Component {
     this.state = {
       postcode: '',
       coordinates: { lat: null, lon: null },
+      showError: false // State to control the visibility of the error message
     };
 
-    // Binding this to work in the callback
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.geocodePostcode = this.geocodePostcode.bind(this);
   }
 
   handleChange(event) {
-    this.setState({postcode: event.target.value});
+    this.setState({
+      postcode: event.target.value,
+      showError: false // Reset error on change
+    });
   }
 
   async geocodePostcode() {
@@ -45,9 +48,9 @@ class GeoCodeFromPostcode extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    // UK postcode validation regex
-    const postcodeRegex = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$/;
+    const postcodeRegex = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))[0-9][A-Za-z]{2})$/;
     if (!postcodeRegex.test(this.state.postcode)) {
+      this.setState({ showError: true }); // Set error state to true if validation fails
       console.error("Error: Postcode format is invalid.");
       return; // Stop execution if the postcode format is invalid
     }
@@ -71,10 +74,11 @@ class GeoCodeFromPostcode extends React.Component {
   }
 
   render() {
-    const { postcode } = this.state;
+    const { postcode, showError } = this.state;
     
     return (
-            <form onSubmit={this.handleSubmit} autoComplete="off">
+      <form onSubmit={this.handleSubmit} autoComplete="off">
+              {showError && <div className='postcodeError'>Invalid format. Please make sure to not add spaces</div>}
                 <input
                   type='text'
                   name='postcode'

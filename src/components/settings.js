@@ -4,7 +4,7 @@ import '../css/settings.css';
 import { IoMdClose, IoMdCreate } from "react-icons/io"; // Assuming you use React Icons for the edit icon
 import { FaRegCheckCircle } from "react-icons/fa";
 import BackgroundSelector from './BackgroundImageSelector'; // Adjust path as necessary
-import GeoCodeFromPostcode from './geocode';
+import GeoCodeFromLocation from './geocode';
 
 
 class Settings extends React.Component {
@@ -108,7 +108,7 @@ class Settings extends React.Component {
 
             <div className='userDetailsField'>
             <p className='settingsLabel'>Update Weather Location</p>
-                <GeoCodeFromPostcode></GeoCodeFromPostcode>
+                <GeoCodeFromLocation></GeoCodeFromLocation>
             </div>
 
             </div>

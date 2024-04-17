@@ -11,6 +11,7 @@ import { IoIosSnow } from "react-icons/io";
 import { BsCloudRainHeavy } from "react-icons/bs";
 import { FiSettings } from 'react-icons/fi'; // Settings icon from react-icons
 import firebase from '../firebase';
+import GeoCodeFromLocation from './geocode';
 
 
 function WeatherApp({ id }) {
@@ -180,6 +181,8 @@ function WeatherApp({ id }) {
                                 <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,0.90) 100%)')}></button>
 
                             </div>
+                            <h4>Enter UK Postcode</h4>
+                            <GeoCodeFromLocation></GeoCodeFromLocation>
                         </div>
                     </div>
                 )}
@@ -196,7 +199,7 @@ function WeatherApp({ id }) {
                 <div className='currentIcon'><TiWeatherCloudy /></div>
             </div>
             
-            ) : <div className='loadWeatherMessage'>Please set your location found in the preferences tab below</div>}
+            ) : <div className='loadWeatherMessage'>Please set your UK Postcode below<div className='subWeatherMessage'>Don't include spaces</div><GeoCodeFromLocation></GeoCodeFromLocation></div>}
             {weatherData ? (
 
             <div className='futureContainer'>

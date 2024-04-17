@@ -150,3 +150,51 @@
     font-weight: bold;
     width: 400px;
 }
+
+.subWeatherMessage{
+    font-size: 1rem;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.settingsContent svg{
+    height: 20px;
+    width: 20px;
+}
+
+.settingsContent svg:hover{
+    fill: #4fff4f;
+}
+
+.settingsContent form{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.postcodeError{
+    color: #ff5b5b;
+}
+
+
+.loadWeatherMessage svg{
+    height: 100%;
+    width: 100%; 
+}
+
+.loadWeatherMessage svg:hover{
+    fill: #4fff4f; 
+}
+
+.loadWeatherMessage button{
+    height: 30px;
+    width: 30px; 
+}
+
+.loadWeatherMessage form{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
