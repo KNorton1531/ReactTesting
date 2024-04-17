@@ -74,26 +74,32 @@ function WeatherApp({ id }) {
     
 
     useEffect(() => {
-        if (coordinates.lat && coordinates.lon) {
-            const fetchWeatherData = async () => {
-                const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric&cnt=5`;
-                const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-
-                try {
-                    const [forecastResponse, currentResponse] = await Promise.all([
-                        axios.get(urlForecast),
-                        axios.get(urlCurrent)
-                    ]);
-                    setWeatherData(forecastResponse.data);
-                    setCurrentWeather(currentResponse.data);
-                } catch (error) {
-                    console.error('Failed to fetch weather data:', error);
-                }
-            };
-
-            fetchWeatherData();
-        }
-    }, [coordinates]);  // Dependency array with id ensures that data is refetched if the id changes
+        const fetchWeatherData = async () => {
+            if (!coordinates.lat || !coordinates.lon) return;
+    
+            const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric&cnt=5`;
+            const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+    
+            try {
+                const [forecastResponse, currentResponse] = await Promise.all([
+                    axios.get(urlForecast),
+                    axios.get(urlCurrent)
+                ]);
+                setWeatherData(forecastResponse.data);
+                setCurrentWeather(currentResponse.data);
+            } catch (error) {
+                console.error('Failed to fetch weather data:', error);
+            }
+        };
+    
+        // Call it immediately and then set the interval
+        fetchWeatherData();
+        const interval = setInterval(fetchWeatherData, 3000); // 900,000 milliseconds = 15 minutes
+    
+        // Clean up the interval on component unmount
+        return () => clearInterval(interval);
+    }, [coordinates]); // Make sure to include all dependencies needed for fetchWeatherData
+      
 
 
     const storageKey = `position_${id}`;
