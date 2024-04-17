@@ -40,7 +40,7 @@ function WeatherApp({ id }) {
         fetchUserData();
     }, []);
 
-    const storedBackground = localStorage.getItem('backgroundStyle') || 'linear-gradient(to right, #6dd5fa, #ffffff)';
+    const storedBackground = localStorage.getItem('backgroundStyle') || '#000000d9';
     const [backgroundStyle, setBackgroundStyle] = useState(storedBackground);
     const [showSettings, setShowSettings] = useState(false);
 
@@ -165,8 +165,8 @@ function WeatherApp({ id }) {
                                 <button style={{backgroundColor: `#000000fa`}} onClick={() => changeBackground('#000000d9')}></button>
                                 <button style={{backgroundColor: `#f8f9fa`}} onClick={() => changeBackground('#f8f9faEd')}></button>
                                 <button style={{backgroundColor: `#5B616A`}}  onClick={() => changeBackground('#5B616AED')}></button>
-                                <button style={{backgroundColor: `#84dcc6`}}  onClick={() => changeBackground('#84dcc6ed')}></button>
-                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
+                                <button style={{backgroundColor: `#57C2A8`}}  onClick={() => changeBackground('#57C2A8ed')}></button>
+                                <button style={{backgroundColor: `#ffba49`}}  onClick={() => changeBackground('#ffba49ed')}></button>
                                 <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
                                 <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
                                 <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
@@ -178,7 +178,10 @@ function WeatherApp({ id }) {
 
                                 <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,0.90) 100%)')}></button>
 
-                                <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,0.90) 100%)')}></button>
+                                <button style={{background: `linear-gradient(0deg, rgba(181,61,255,1) 0%, rgba(145,255,152,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(181,61,255,1) 0%, rgba(145,255,152,1) 100%)')}></button>
+
+                                <button style={{background: `linear-gradient(to top, #051937, #004d7a, #008793, #00bf72, #a8eb12)`}} onClick={() => changeBackground('linear-gradient(to top, #051937, #004d7a, #008793, #00bf72, #a8eb12)')}></button>
+
 
                             </div>
                             <h4>Enter UK Postcode</h4>
