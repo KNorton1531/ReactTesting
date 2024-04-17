@@ -10,9 +10,34 @@ import { LiaCloudSunSolid } from "react-icons/lia";
 import { IoIosSnow } from "react-icons/io";
 import { BsCloudRainHeavy } from "react-icons/bs";
 import { FiSettings } from 'react-icons/fi'; // Settings icon from react-icons
+import firebase from '../firebase';
 
 
 function WeatherApp({ id }) {
+
+    const [coordinates, setCoordinates] = useState({ lat: null, lon: null });
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const user = firebase.auth().currentUser;
+            if (user) {
+                const userRef = firebase.firestore().collection('users').doc(user.uid);
+                try {
+                    const doc = await userRef.get();
+                    if (doc.exists) {
+                        const { lat, lon } = doc.data().coordinates;
+                        setCoordinates({ lat, lon });
+                    } else {
+                        console.log("No such document!");
+                    }
+                } catch (error) {
+                    console.error("Error getting document:", error);
+                }
+            }
+        };
+
+        fetchUserData();
+    }, []);
 
     const storedBackground = localStorage.getItem('backgroundStyle') || 'linear-gradient(to right, #6dd5fa, #ffffff)';
     const [backgroundStyle, setBackgroundStyle] = useState(storedBackground);
@@ -39,29 +64,26 @@ function WeatherApp({ id }) {
     };
 
     useEffect(() => {
-        const lat = '53.78395';
-        const lon = '-2.89291';
-        const fetchWeatherData = async () => {
-            const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&cnt=5`;
-            const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        if (coordinates.lat && coordinates.lon) {
+            const fetchWeatherData = async () => {
+                const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric&cnt=5`;
+                const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
 
-            try {
-                const [forecastResponse, currentResponse] = await Promise.all([
-                    axios.get(urlForecast),
-                    axios.get(urlCurrent)
-                ]);
-                setWeatherData(forecastResponse.data);
-                setCurrentWeather(currentResponse.data);
+                try {
+                    const [forecastResponse, currentResponse] = await Promise.all([
+                        axios.get(urlForecast),
+                        axios.get(urlCurrent)
+                    ]);
+                    setWeatherData(forecastResponse.data);
+                    setCurrentWeather(currentResponse.data);
+                } catch (error) {
+                    console.error('Failed to fetch weather data:', error);
+                }
+            };
 
-                console.log(currentResponse.data);
-                console.log(forecastResponse.data);
-            } catch (error) {
-                console.error('Failed to fetch weather data:', error);
-            }
-        };
-
-        fetchWeatherData();
-    }, [id]);  // Dependency array with id ensures that data is refetched if the id changes
+            fetchWeatherData();
+        }
+    }, [coordinates]);  // Dependency array with id ensures that data is refetched if the id changes
 
 
     const storageKey = `position_${id}`;
@@ -149,13 +171,13 @@ function WeatherApp({ id }) {
                                 <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
                             </div>
                             <div class="colourOptions">
-                                <button style={{background: `linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,1) 100%)')}></button>
+                                <button style={{background: `linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,0.90) 100%)')}></button>
 
-                                <button style={{background: `linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,1) 100%)')}></button>
+                                <button style={{background: `linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,0.90) 100%)')}></button>
 
-                                <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)')}></button>
+                                <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,0.90) 100%)')}></button>
 
-                                <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)')}></button>
+                                <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,0.90) 100%)')}></button>
 
                             </div>
                         </div>
@@ -174,7 +196,7 @@ function WeatherApp({ id }) {
                 <div className='currentIcon'><TiWeatherCloudy /></div>
             </div>
             
-            ) : 'Loading Current Weather...'}
+            ) : <div className='loadWeatherMessage'>Please set your location found in the preferences tab below</div>}
             {weatherData ? (
 
             <div className='futureContainer'>
@@ -211,7 +233,7 @@ function WeatherApp({ id }) {
                 </div>
             </div>
            
-            ) : 'Loading Forecast...'}
+            ) : ''}
             </div>
 
 
