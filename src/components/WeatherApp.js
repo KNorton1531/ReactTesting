@@ -94,7 +94,7 @@ function WeatherApp({ id }) {
     
         // Call it immediately and then set the interval
         fetchWeatherData();
-        const interval = setInterval(fetchWeatherData, 3000); // 900,000 milliseconds = 15 minutes
+        const interval = setInterval(fetchWeatherData, 900000); // 900,000 milliseconds = 15 minutes
     
         // Clean up the interval on component unmount
         return () => clearInterval(interval);
