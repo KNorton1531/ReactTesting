@@ -78,7 +78,7 @@ class GeoCodeFromPostcode extends React.Component {
     
     return (
       <form onSubmit={this.handleSubmit} autoComplete="off">
-              {showError && <div className='postcodeError'>Invalid format. Please make sure to not add spaces</div>}
+              {showError && <div className='postcodeError'>Invalid format. Please make sure to <u><b>not</b></u> add spaces</div>}
                 <input
                   type='text'
                   name='postcode'

@@ -43,6 +43,9 @@ function WeatherApp({ id }) {
     const storedBackground = localStorage.getItem('backgroundStyle') || '#000000d9';
     const [backgroundStyle, setBackgroundStyle] = useState(storedBackground);
     const [showSettings, setShowSettings] = useState(false);
+    const storedTextColor = localStorage.getItem('textColorStyle') || '#000000'; // Default to black if not set
+    const [textColor, setTextColor] = useState(storedTextColor);
+
 
     const toggleSettings = () => setShowSettings(!showSettings);
     const changeBackground = (style) => {
@@ -63,6 +66,12 @@ function WeatherApp({ id }) {
         const y = (window.innerHeight - playerHeight) / 2;
         return { x, y };
     };
+
+    const changeTextColor = (color) => {
+        setTextColor(color);
+        localStorage.setItem('textColorStyle', color); // Save text color to local storage
+    };
+    
 
     useEffect(() => {
         if (coordinates.lat && coordinates.lon) {
@@ -152,7 +161,7 @@ function WeatherApp({ id }) {
 
     return (
         <Draggable position={position} onStop={handleStop} bounds="parent" handle={'.weatherHandle'}>
-            <div className='weatherWrapper' id='WeatherApp' style={{ background: backgroundStyle }}>
+            <div className='weatherWrapper' id='WeatherApp' style={{ background: backgroundStyle, color: textColor }}>
             <div className='weatherHandle'>
                     <FiSettings onClick={toggleSettings} /> {/* Settings Icon */}
                 </div>
@@ -160,16 +169,16 @@ function WeatherApp({ id }) {
                 {showSettings && (
                     <div className='settingsOverlay'>
                         <div class="settingsContent">
-                            <h4>Settings <div class="locationMessage">Change location in the preferences menu at the bottom</div></h4>
+                            <h4>Settings</h4>
                             <div class="colourOptions">
-                                <button style={{backgroundColor: `#000000fa`}} onClick={() => changeBackground('#000000d9')}></button>
-                                <button style={{backgroundColor: `#f8f9fa`}} onClick={() => changeBackground('#f8f9faEd')}></button>
-                                <button style={{backgroundColor: `#5B616A`}}  onClick={() => changeBackground('#5B616AED')}></button>
-                                <button style={{backgroundColor: `#57C2A8`}}  onClick={() => changeBackground('#57C2A8ed')}></button>
-                                <button style={{backgroundColor: `#ffba49`}}  onClick={() => changeBackground('#ffba49ed')}></button>
-                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
-                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
-                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
+                                <button style={{backgroundColor: `#000000fa`}} onClick={() => {changeBackground('#000000d9'); changeTextColor('#fff')}}></button>
+                                <button style={{backgroundColor: `#f8f9fa`}} onClick={() => {changeBackground('#f8f9faEd'); changeTextColor('#242424')}}></button>
+                                <button style={{backgroundColor: `#5B616A`}}  onClick={() => {changeBackground('#5B616AED'); changeTextColor('#fff')}}></button>
+                                <button style={{backgroundColor: `#57C2A8`}}  onClick={() => {changeBackground('#57C2A8ed'); changeTextColor('#fff')}}></button>
+                                <button style={{backgroundColor: `#ffba49`}}  onClick={() => {changeBackground('#ffba49ed'); changeTextColor('#fff')}}></button>
+                                <button style={{backgroundColor: `#00B3D7`}}  onClick={() => {changeBackground('#00B3D7ed'); changeTextColor('#fff')}}></button>
+                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => {changeBackground('#a06cd5ed'); changeTextColor('#fff')}}></button>
+                                <button style={{backgroundColor: `#ba1b1d`}}  onClick={() => {changeBackground('#ba1b1ded'); changeTextColor('#fff')}}></button>
                             </div>
                             <div class="colourOptions">
                                 <button style={{background: `linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,0.90) 100%)')}></button>
@@ -180,11 +189,22 @@ function WeatherApp({ id }) {
 
                                 <button style={{background: `linear-gradient(0deg, rgba(181,61,255,1) 0%, rgba(145,255,152,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(181,61,255,1) 0%, rgba(145,255,152,1) 100%)')}></button>
 
-                                <button style={{background: `linear-gradient(to top, #051937, #004d7a, #008793, #00bf72, #a8eb12)`}} onClick={() => changeBackground('linear-gradient(to top, #051937, #004d7a, #008793, #00bf72, #a8eb12)')}></button>
-
+                                <button style={{background: 'lightblue url("https://t4.ftcdn.net/jpg/04/61/23/23/360_F_461232389_XCYvca9n9P437nm3FrCsEIapG4SrhufP.jpg") no-repeat fixed center'}}
+                                    onClick={() => {
+                                        changeBackground('lightblue url("https://t4.ftcdn.net/jpg/04/61/23/23/360_F_461232389_XCYvca9n9P437nm3FrCsEIapG4SrhufP.jpg") no-repeat fixed center');
+                                        changeTextColor('#242424');
+                                    }}>
+                                </button>
 
                             </div>
-                            <h4>Enter UK Postcode</h4>
+
+                            <div class="colourOptions">
+                                <button style={{backgroundColor: '#242424'}} onClick={() => changeTextColor('#242424')}>Aa</button>
+                                <button style={{backgroundColor: '#ffffff', color: "#000"}} onClick={() => changeTextColor('#ffffff')}>Aa</button>
+                            
+                            </div>
+
+                            <h4 className='postcodeHeader'>Enter UK Postcode</h4>
                             <GeoCodeFromLocation></GeoCodeFromLocation>
                         </div>
                     </div>
@@ -197,7 +217,6 @@ function WeatherApp({ id }) {
                     <h4 className='currentLocation'>{currentWeather.name}</h4>
                     <h4 className='weatherDescription'>{capitalizeFirstLetter(currentWeather.weather[0].description)}</h4>
                     <h4 className='currentTemp'>{Math.round(currentWeather.main.temp)}°C</h4>
-                    <h4 className='highLowTemp'>{Math.round(currentWeather.main.temp_max)}° / {Math.round(currentWeather.main.temp_min)}°C</h4>
                 </div>
                 <div className='currentIcon'><TiWeatherCloudy /></div>
             </div>
