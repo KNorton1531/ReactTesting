@@ -1,6 +1,5 @@
 .weatherWrapper{
     border: solid 1px #fff;
-    width: 300px;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.85);
     color: #fff;
@@ -17,4 +16,74 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.currentContainer{
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.futureContainer{
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+}
+
+.weatherItem{
+    border: solid 1px red;
+    padding: 5px 10px;
+    width: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 0.9rem;
+    flex: 1 1 0px;
+    align-items: center;
+    text-align: center;
+}
+
+.currentIcon{
+    width: 25%;
+}
+
+.currentIcon svg{
+    width: 100%;
+    height: 100%;
+}
+
+.weatherItem h4{
+    margin: 0;
+    margin-top: 20px;
+}
+
+.currentTemp{
+    font-size: 3rem;
+    margin: 0;
+}
+
+.highLowTemp{
+    margin: 0;
+    font-weight: normal;
+}
+
+.weatherDescription{
+    margin-top: 0;
+    font-size: 2rem;
+    margin-bottom: 0px;
+}
+
+.currentLocation{
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+.forecastIcon{
+    width: 60px;
+}
+
+.forecastIcon svg{
+    width: 100%;
+    height: 100%;
 }

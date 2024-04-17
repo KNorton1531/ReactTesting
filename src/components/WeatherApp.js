@@ -3,6 +3,9 @@ import Draggable from 'react-draggable';
 import '../css/weather.css';
 import axios from 'axios';  // Add this for making API requests
 import { format, parseISO } from 'date-fns';
+import { TiWeatherCloudy } from "react-icons/ti";
+import WeatherIcon from "./weatherIcons";
+
 
 
 function WeatherApp({ id }) {
@@ -25,7 +28,7 @@ function WeatherApp({ id }) {
         const lat = '53.78395';
         const lon = '-2.89291';
         const fetchWeatherData = async () => {
-            const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&cnt=4`;
+            const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&cnt=5`;
             const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
             try {
@@ -97,23 +100,29 @@ function WeatherApp({ id }) {
         if (!string) return '';
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
+    function formatTime(dateTimeString) {
+        const date = new Date(dateTimeString);
+        return date.toLocaleTimeString([], { hour: 'numeric', hour12: true });
+    }
+    
     
 
     return (
         <Draggable position={position} onStop={handleStop} bounds="parent" handle={'.weatherHandle'}>
             <div className='weatherWrapper' id='WeatherApp'>
-            <div class="weatherHandle">
-            </div>
+            <div class="weatherHandle"></div>
+
             {currentWeather ? (
                
             <div className='currentContainer'>
                 <div className='currentInformation'>
-                    <h4>{currentWeather.name}</h4>
-                    <h4>{Math.round(currentWeather.main.temp)}°C</h4>
-                    <h4>{Math.round(currentWeather.main.temp_max)}° / {Math.round(currentWeather.main.temp_min)}°C</h4>
-                    <h4>{capitalizeFirstLetter(currentWeather.weather[0].description)}</h4>
+                    <h4 className='currentLocation'>{currentWeather.name}</h4>
+                    <h4 className='weatherDescription'>{capitalizeFirstLetter(currentWeather.weather[0].description)}</h4>
+                    <h4 className='currentTemp'>{Math.round(currentWeather.main.temp)}°C</h4>
+                    <h4 className='highLowTemp'>{Math.round(currentWeather.main.temp_max)}° / {Math.round(currentWeather.main.temp_min)}°C</h4>
                 </div>
-                <div className='currentIcon'>{currentWeather.weather[0].icon}</div>
+                <div className='currentIcon'><TiWeatherCloudy /></div>
             </div>
 
             ) : 'Loading Current Weather...'}
@@ -121,23 +130,35 @@ function WeatherApp({ id }) {
 
             <div className='futureContainer'>
                 <div className='weatherItem'>
-                {weatherData.list[0].weather[0].description}
+                    <div className='forecastIcon'>
+                        <WeatherIcon code={weatherData.list[0].weather[0].icon} />
+                    </div>
+                    <div class="futureTemp">{Math.round(weatherData.list[1].main.temp)}°C</div>
+                    <h4>{formatTime(weatherData.list[0].dt_txt)}</h4>
                 </div>
 
                 <div className='weatherItem'>
-
+                    <div className='forecastIcon'>
+                        <WeatherIcon code={weatherData.list[1].weather[0].icon} />
+                    </div>
+                    <div class="futureTemp">{Math.round(weatherData.list[2].main.temp)}°C</div>
+                    <h4>{formatTime(weatherData.list[1].dt_txt)}</h4>
                 </div>
 
                 <div className='weatherItem'>
-
+                    <div className='forecastIcon'>
+                        <WeatherIcon code={weatherData.list[2].weather[0].icon} />
+                    </div>
+                    <div class="futureTemp">{Math.round(weatherData.list[2].main.temp)}°C</div>
+                    <h4>{formatTime(weatherData.list[2].dt_txt)}</h4>
                 </div>
 
                 <div className='weatherItem'>
-
-                </div>
-
-                <div className='weatherItem'>
-
+                    <div className='forecastIcon'>
+                        <WeatherIcon code={weatherData.list[3].weather[0].icon} />
+                    </div>
+                    <div class="futureTemp">{Math.round(weatherData.list[3].main.temp)}°C</div>
+                    <h4>{formatTime(weatherData.list[3].dt_txt)}</h4>
                 </div>
             </div>
            
