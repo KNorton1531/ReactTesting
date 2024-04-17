@@ -1,14 +1,28 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import '../css/weather.css';
 import axios from 'axios';  // Add this for making API requests
 import { format, parseISO } from 'date-fns';
 import { TiWeatherCloudy } from "react-icons/ti";
 import WeatherIcon from "./weatherIcons";
-
+import { WiDaySunny, WiNightClear, WiCloud, WiRain, WiThunderstorm, WiSnow, WiFog, WiRainMix } from 'react-icons/wi';
+import { LiaCloudSunSolid } from "react-icons/lia";
+import { IoIosSnow } from "react-icons/io";
+import { BsCloudRainHeavy } from "react-icons/bs";
+import { FiSettings } from 'react-icons/fi'; // Settings icon from react-icons
 
 
 function WeatherApp({ id }) {
+
+    const storedBackground = localStorage.getItem('backgroundStyle') || 'linear-gradient(to right, #6dd5fa, #ffffff)';
+    const [backgroundStyle, setBackgroundStyle] = useState(storedBackground);
+    const [showSettings, setShowSettings] = useState(false);
+
+    const toggleSettings = () => setShowSettings(!showSettings);
+    const changeBackground = (style) => {
+        setBackgroundStyle(style);
+        localStorage.setItem('backgroundStyle', style); // Store the background style in local storage
+    };
 
     const playerWidth = 640; // Set the width of the YouTube player
     const playerHeight = 390; // Set the height of the YouTube player
@@ -105,13 +119,48 @@ function WeatherApp({ id }) {
         const date = new Date(dateTimeString);
         return date.toLocaleTimeString([], { hour: 'numeric', hour12: true });
     }
+
+    useEffect(() => {
+        // Apply the stored background style when component mounts
+        setBackgroundStyle(storedBackground);
+    }, []);
     
     
 
     return (
         <Draggable position={position} onStop={handleStop} bounds="parent" handle={'.weatherHandle'}>
-            <div className='weatherWrapper' id='WeatherApp'>
-            <div class="weatherHandle"></div>
+            <div className='weatherWrapper' id='WeatherApp' style={{ background: backgroundStyle }}>
+            <div className='weatherHandle'>
+                    <FiSettings onClick={toggleSettings} /> {/* Settings Icon */}
+                </div>
+
+                {showSettings && (
+                    <div className='settingsOverlay'>
+                        <div class="settingsContent">
+                            <h4>Settings <div class="locationMessage">Change location in the preferences menu at the bottom</div></h4>
+                            <div class="colourOptions">
+                                <button style={{backgroundColor: `#000000fa`}} onClick={() => changeBackground('#000000d9')}></button>
+                                <button style={{backgroundColor: `#f8f9fa`}} onClick={() => changeBackground('#f8f9faEd')}></button>
+                                <button style={{backgroundColor: `#5B616A`}}  onClick={() => changeBackground('#5B616AED')}></button>
+                                <button style={{backgroundColor: `#84dcc6`}}  onClick={() => changeBackground('#84dcc6ed')}></button>
+                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
+                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
+                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
+                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => changeBackground('#a06cd5ed')}></button>
+                            </div>
+                            <div class="colourOptions">
+                                <button style={{background: `linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,1) 100%)')}></button>
+
+                                <button style={{background: `linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,1) 100%)')}></button>
+
+                                <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)')}></button>
+
+                                <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)')}></button>
+
+                            </div>
+                        </div>
+                    </div>
+                )}
 
             {currentWeather ? (
                
@@ -124,7 +173,7 @@ function WeatherApp({ id }) {
                 </div>
                 <div className='currentIcon'><TiWeatherCloudy /></div>
             </div>
-
+            
             ) : 'Loading Current Weather...'}
             {weatherData ? (
 
@@ -164,6 +213,8 @@ function WeatherApp({ id }) {
            
             ) : 'Loading Forecast...'}
             </div>
+
+
         </Draggable>
     );
 }
