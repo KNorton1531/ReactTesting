@@ -43,7 +43,7 @@ function WeatherApp({ id }) {
     const storedBackground = localStorage.getItem('backgroundStyle') || '#000000d9';
     const [backgroundStyle, setBackgroundStyle] = useState(storedBackground);
     const [showSettings, setShowSettings] = useState(false);
-    const storedTextColor = localStorage.getItem('textColorStyle') || '#000000'; // Default to black if not set
+    const storedTextColor = localStorage.getItem('textColorStyle') || '#fff'
     const [textColor, setTextColor] = useState(storedTextColor);
 
 
