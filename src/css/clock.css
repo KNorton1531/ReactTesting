@@ -1,0 +1,29 @@
+.clockWrapper{
+    position: absolute;
+    cursor: grab;
+    border: solid 1px #fff;
+    padding: 10px 30px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: rgba(0, 0, 0, 0.781);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.clockWrapper:active{
+    cursor: grabbing;
+}
+
+.clockWrapper .colourOptions{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.clockWrapper p{
+    margin: 0;
+}

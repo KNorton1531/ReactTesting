@@ -174,9 +174,9 @@ function WeatherApp({ id }) {
 
                 {showSettings && (
                     <div className='settingsOverlay'>
-                        <div class="settingsContent">
+                        <div className="settingsContent">
                             <h4>Settings</h4>
-                            <div class="colourOptions">
+                            <div className="colourOptions">
                                 <button style={{backgroundColor: `#000000fa`}} onClick={() => {changeBackground('#000000d9'); changeTextColor('#fff')}}></button>
                                 <button style={{backgroundColor: `#f8f9fa`}} onClick={() => {changeBackground('#f8f9faEd'); changeTextColor('#242424')}}></button>
                                 <button style={{backgroundColor: `#5B616A`}}  onClick={() => {changeBackground('#5B616AED'); changeTextColor('#fff')}}></button>
@@ -186,7 +186,7 @@ function WeatherApp({ id }) {
                                 <button style={{backgroundColor: `#a06cd5`}}  onClick={() => {changeBackground('#a06cd5ed'); changeTextColor('#fff')}}></button>
                                 <button style={{backgroundColor: `#ba1b1d`}}  onClick={() => {changeBackground('#ba1b1ded'); changeTextColor('#fff')}}></button>
                             </div>
-                            <div class="colourOptions">
+                            <div className="colourOptions">
                                 <button style={{background: `linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,0.90) 100%)')}></button>
 
                                 <button style={{background: `linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,0.90) 100%)')}></button>
@@ -204,7 +204,7 @@ function WeatherApp({ id }) {
 
                             </div>
 
-                            <div class="colourOptions">
+                            <div className="colourOptions">
                                 <button style={{backgroundColor: '#242424'}} onClick={() => changeTextColor('#242424')}>Aa</button>
                                 <button style={{backgroundColor: '#ffffff', color: "#000"}} onClick={() => changeTextColor('#ffffff')}>Aa</button>
                             
@@ -235,7 +235,7 @@ function WeatherApp({ id }) {
                     <div className='forecastIcon'>
                         <WeatherIcon code={weatherData.list[0].weather[0].icon} />
                     </div>
-                    <div class="futureTemp">{Math.round(weatherData.list[1].main.temp)}°C</div>
+                    <div className="futureTemp">{Math.round(weatherData.list[1].main.temp)}°C</div>
                     <h4>{formatTime(weatherData.list[0].dt_txt)}</h4>
                 </div>
 
@@ -243,7 +243,7 @@ function WeatherApp({ id }) {
                     <div className='forecastIcon'>
                         <WeatherIcon code={weatherData.list[1].weather[0].icon} />
                     </div>
-                    <div class="futureTemp">{Math.round(weatherData.list[2].main.temp)}°C</div>
+                    <div className="futureTemp">{Math.round(weatherData.list[2].main.temp)}°C</div>
                     <h4>{formatTime(weatherData.list[1].dt_txt)}</h4>
                 </div>
 
@@ -251,7 +251,7 @@ function WeatherApp({ id }) {
                     <div className='forecastIcon'>
                         <WeatherIcon code={weatherData.list[2].weather[0].icon} />
                     </div>
-                    <div class="futureTemp">{Math.round(weatherData.list[2].main.temp)}°C</div>
+                    <div className="futureTemp">{Math.round(weatherData.list[2].main.temp)}°C</div>
                     <h4>{formatTime(weatherData.list[2].dt_txt)}</h4>
                 </div>
 
@@ -259,7 +259,7 @@ function WeatherApp({ id }) {
                     <div className='forecastIcon'>
                         <WeatherIcon code={weatherData.list[3].weather[0].icon} />
                     </div>
-                    <div class="futureTemp">{Math.round(weatherData.list[3].main.temp)}°C</div>
+                    <div className="futureTemp">{Math.round(weatherData.list[3].main.temp)}°C</div>
                     <h4>{formatTime(weatherData.list[3].dt_txt)}</h4>
                 </div>
             </div>

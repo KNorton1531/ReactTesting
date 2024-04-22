@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BottomMenu from './BottomMenu'; // Make sure this path is correct
 import DraggableTest from './draggableTest';
 import DraggableTest2 from './draggableTest2';
+import Clock from './clock';
 import SignOut from './SignOut';
 import '../css/Canvas.css';
 import { BiMusic } from "react-icons/bi";
@@ -18,6 +19,7 @@ import { FiYoutube } from "react-icons/fi";
 import { HiOutlinePaintBrush } from "react-icons/hi2";
 import WeatherApp from './WeatherApp';
 import { IoCloudyNightOutline } from "react-icons/io5";
+import { FaRegClock } from "react-icons/fa";
 
 
 
@@ -34,32 +36,38 @@ const Canvas = () => {
       label: 'Effects',
       icon: <BiMusic   />, // Material Icons accessibility icon
       canCloseOutside: false,
-  },
-  { 
-    id: 'second', 
-    label: 'Effects',
-    icon: <BsSnow />, // Material Icons accessibility icon
-    canCloseOutside: false,
-},
-{ 
-  id: 'youtubeWatcher', 
-  label: 'Effects',
-  icon: <FiYoutube />, // Material Icons accessibility icon
-  canCloseOutside: false,
-},
-{ 
-  id: 'WeatherApp', 
-  label: 'WeatherApp',
-  icon: <IoCloudyNightOutline   />, // Material Icons accessibility icon
-  canCloseOutside: false,
-},
-{ 
-  id: 'Settings', 
-  label: 'Settings',
-  icon: <HiOutlinePaintBrush />, // Material Icons accessibility icon
-  canCloseOutside: true,
-},
-];
+    },
+    { 
+      id: 'second', 
+      label: 'Effects',
+      icon: <BsSnow />, // Material Icons accessibility icon
+      canCloseOutside: false,
+    },
+    { 
+      id: 'youtubeWatcher', 
+      label: 'Effects',
+      icon: <FiYoutube />, // Material Icons accessibility icon
+      canCloseOutside: false,
+    },
+    { 
+      id: 'WeatherApp', 
+      label: 'WeatherApp',
+      icon: <IoCloudyNightOutline   />, // Material Icons accessibility icon
+      canCloseOutside: false,
+    },
+    { 
+      id: 'Settings', 
+      label: 'Settings',
+      icon: <HiOutlinePaintBrush />, // Material Icons accessibility icon
+      canCloseOutside: true,
+    },
+    { 
+      id: 'Clock', 
+      label: 'Clock',
+      icon: <FaRegClock />, // Material Icons accessibility icon
+      canCloseOutside: false,
+    },
+  ];
 
     const defaultBackground = {
         url: 'https://lofico.nyc3.cdn.digitaloceanspaces.com/scenes/cottage/cottage-exterior-final.mp4', // Default background image URL
@@ -99,6 +107,7 @@ const Canvas = () => {
           <DraggableYouTubePlayer id="youtubePlayer"/>
           <DraggableYouTubeWatcher id="youtubeWatcher"/>
           <WeatherApp />
+          <Clock id="Clock" />
           <Settings id="Settings" onBackgroundChange={handleBackgroundChange} />
           <BottomMenu toggles={toggleComponents} />
 
