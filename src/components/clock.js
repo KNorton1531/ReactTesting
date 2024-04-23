@@ -4,7 +4,6 @@ import moment from 'moment';
 import '../css/clock.css';
 import { FiSettings } from 'react-icons/fi'; // Settings icon from react-icons
 import { IoCloseOutline } from "react-icons/io5";
-import { useDrawer } from './DrawerContext';
 import GeoCodeFromLocation from './geocode';
 
 function Clock({ id }) {
@@ -23,12 +22,6 @@ function Clock({ id }) {
     const [backgroundStyle, setBackgroundStyle] = useState(localStorage.getItem('clockBackgroundStyle') || '#000000d9');
     const [textColor, setTextColor] = useState(localStorage.getItem('clocktextColorStyle') || '#fff');
 
-    const { openDrawer } = useDrawer();
-
-    const handleOpenSettings = () => {
-        const settingsContent =  <GeoCodeFromLocation></GeoCodeFromLocation>;
-        openDrawer(settingsContent);
-    };
 
     useEffect(() => {
       const timer = setInterval(() => setCurrentTime(moment()), 1000);
