@@ -83,7 +83,8 @@ select:not(:-internal-select-author-button) {
 }
 
 .youtubePlayer{
-  height: calc(100% - 67px);;
+  height: calc(100% - 67px);
+  pointer-events: none;
 }
 
 .ytPlayPause{
