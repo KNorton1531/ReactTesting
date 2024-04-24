@@ -30,7 +30,6 @@ function Clock({ id }) {
 
     const toggleSettings = () => {
         setShowSettings(!showSettings);
-        setShowSettingsIcon(true);
     };
 
     const handleMouseEnter = () => {
@@ -39,9 +38,7 @@ function Clock({ id }) {
     };
 
     const handleMouseLeave = () => {
-        if (!showSettings) {
             settingsIconTimeoutRef.current = setTimeout(() => setShowSettingsIcon(false), 500);
-        }
     };
 
     const changeFontSize = (fontSize) => {
@@ -106,6 +103,7 @@ function Clock({ id }) {
                         <p>{currentTime.format('h:mm A')}</p>
                     </div>
                     <IoCloseOutline className='clockCloseSettings' onClick={toggleSettings} style={{ cursor: 'pointer', color: '#fff'}} />
+                    <h3>Background Colour</h3>
                         <div className="colourOptions">
                             <button className='noBackgroundCircle' onClick={() => {changeBackground('#00000000'); changeTextColor('#fff')}}></button>
                             <button style={{backgroundColor: `#000000fa`}} onClick={() => {changeBackground('#000000d9'); changeTextColor('#fff')}}></button>
@@ -118,8 +116,8 @@ function Clock({ id }) {
                             <button style={{backgroundColor: `#ba1b1d`}}  onClick={() => {changeBackground('#ba1b1ded'); changeTextColor('#fff')}}></button>
                         </div>
 
+                    <h3>Font Size</h3>
                         <div className="fontOptions">
-
                             <button onClick={() => {changeFontSize('2rem')}}>Small</button>
                             <button onClick={() => {changeFontSize('4rem')}}>Medium</button>
                             <button onClick={() => {changeFontSize('5rem')}}>Big</button>
