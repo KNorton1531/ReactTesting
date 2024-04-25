@@ -21,6 +21,8 @@ function Clock({ id }) {
     const [fontSize, setFontSize] = useState(localStorage.getItem('clockFontSize') || '24px');
     const [backgroundStyle, setBackgroundStyle] = useState(localStorage.getItem('clockBackgroundStyle') || '#000000d9');
     const [textColor, setTextColor] = useState(localStorage.getItem('clocktextColorStyle') || '#fff');
+    const [textShadow, setTextShadow] = useState(localStorage.getItem('clocktextShadowStyle') || '2px 2px #000000');
+    const [borderRadius, setBorderRadius] = useState(localStorage.getItem('clockBorderRadius') || '0px');
 
 
     useEffect(() => {
@@ -29,7 +31,7 @@ function Clock({ id }) {
     }, []);
 
     const toggleSettings = () => {
-        setShowSettings(!showSettings);
+        setShowSettings(prev => !prev);
     };
 
     const handleMouseEnter = () => {
@@ -46,9 +48,19 @@ function Clock({ id }) {
         localStorage.setItem('clockFontSize', fontSize);
     };
 
+    const changeFontShadow = (textShadow) => {
+        setTextShadow(textShadow);
+        localStorage.setItem('clockFontShadow', textShadow);
+    };
+
     const changeBackground = (style) => {
         setBackgroundStyle(style);
         localStorage.setItem('clockBackgroundStyle', style);
+    };
+
+    const changeBorderRadius = (borderRadius) => {
+        setBorderRadius(borderRadius);
+        localStorage.setItem('clockBorderRadius', borderRadius);
     };
 
     const changeTextColor = (color) => {
@@ -85,7 +97,8 @@ function Clock({ id }) {
     return (
         <>
         <Draggable position={position} onStop={handleStop} bounds="parent" handle={'.clockWrapper'} cancel={'.fontOptions'}>
-            <div className='clockWrapper' id='Clock' style={{ background: backgroundStyle, color: textColor }}
+            <div className='clockWrapper' id='Clock' style={{ background: backgroundStyle, color: textColor, textShadow: textShadow, borderRadius: borderRadius, }}
+
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}>
                 <p style={{ fontSize: fontSize}}>{currentTime.format('h:mm A')}</p>
@@ -98,22 +111,31 @@ function Clock({ id }) {
         </Draggable>
 
             {showSettings && (
-                <div className='settingsContainer'>
+                <div className={`settingsContainer ${showSettings ? 'on' : ''}`}>
                     <div className='exampleClockContainer' style={{ background: backgroundStyle, color: textColor,}}>
                         <p>{currentTime.format('h:mm A')}</p>
                     </div>
                     <IoCloseOutline className='clockCloseSettings' onClick={toggleSettings} style={{ cursor: 'pointer', color: '#fff'}} />
                     <h3>Background Colour</h3>
                         <div className="colourOptions">
-                            <button className='noBackgroundCircle' onClick={() => {changeBackground('#00000000'); changeTextColor('#fff')}}></button>
-                            <button style={{backgroundColor: `#000000fa`}} onClick={() => {changeBackground('#000000d9'); changeTextColor('#fff')}}></button>
-                            <button style={{backgroundColor: `#f8f9fa`}} onClick={() => {changeBackground('#f8f9faEd'); changeTextColor('#242424')}}></button>
-                            <button style={{backgroundColor: `#5B616A`}}  onClick={() => {changeBackground('#5B616AED'); changeTextColor('#fff')}}></button>
-                            <button style={{backgroundColor: `#57C2A8`}}  onClick={() => {changeBackground('#57C2A8ed'); changeTextColor('#fff')}}></button>
-                            <button style={{backgroundColor: `#ffba49`}}  onClick={() => {changeBackground('#ffba49ed'); changeTextColor('#fff')}}></button>
-                            <button style={{backgroundColor: `#00B3D7`}}  onClick={() => {changeBackground('#00B3D7ed'); changeTextColor('#fff')}}></button>
-                            <button style={{backgroundColor: `#a06cd5`}}  onClick={() => {changeBackground('#a06cd5ed'); changeTextColor('#fff')}}></button>
-                            <button style={{backgroundColor: `#ba1b1d`}}  onClick={() => {changeBackground('#ba1b1ded'); changeTextColor('#fff')}}></button>
+                            <button className='noBackgroundCircle' onClick={() => {changeBackground('#00000000')}}></button>
+                            <button style={{backgroundColor: `#000000fa`}} onClick={() => {changeBackground('#000000d9')}}></button>
+                            <button style={{backgroundColor: `#000000fa`}} onClick={() => {changeBackground('#0000008c')}}></button>
+                            <button style={{backgroundColor: `#f8f9fa`}} onClick={() => {changeBackground('#f8f9faEd')}}></button>
+                            <button style={{backgroundColor: `#cdcdcd8c`}}  onClick={() => {changeBackground('#cdcdcd8c')}}></button>
+                            <button style={{backgroundColor: `#57C2A8`}}  onClick={() => {changeBackground('#57C2A8ed')}}></button>
+                            <button style={{backgroundColor: `#ffba49`}}  onClick={() => {changeBackground('#ffba49ed')}}></button>
+                            <button style={{backgroundColor: `#00B3D7`}}  onClick={() => {changeBackground('#00B3D7ed')}}></button>
+                            <button style={{backgroundColor: `#a06cd5`}}  onClick={() => {changeBackground('#a06cd5ed')}}></button>
+                        </div>
+
+                    <h3>Text Colour</h3>
+                        <div className="colourOptions">
+                            <button style={{backgroundColor: `#000`}}  onClick={() => {changeTextColor('#000')}}></button>
+                            <button style={{backgroundColor: `#fff`}}  onClick={() => {changeTextColor('#fff')}}></button>
+                            <button style={{backgroundColor: `#313131`}}  onClick={() => {changeTextColor('#313131')}}></button>
+                            <button style={{backgroundColor: `#5A5A5A`}}  onClick={() => {changeTextColor('#5A5A5A')}}></button>
+                            <button style={{backgroundColor: `#ba1b1d`}}  onClick={() => {changeTextColor('#fff')}}></button>
                         </div>
 
                     <h3>Font Size</h3>
@@ -123,6 +145,20 @@ function Clock({ id }) {
                             <button onClick={() => {changeFontSize('5rem')}}>Big</button>
                             <button onClick={() => {changeFontSize('7rem')}}>Massive</button>
                         </div>
+
+                        <h3>Text Shadow</h3>
+                        <div className="fontOptions">
+                            <button onClick={() => {changeFontShadow('3px 3px #000000')}}>Text Shadow</button>
+                            <button onClick={() => {changeFontShadow('none')}}>Text Shadow Off</button>
+                        </div>
+
+                        <h3>Border</h3>
+                        <div className="fontOptions">
+                            <button style={{borderRadius: `0px`}} onClick={() => {changeBorderRadius('0px')}}>Square</button>
+                            <button style={{borderRadius: `10px`}} onClick={() => {changeBorderRadius('10px')}}>Soft edge</button>
+                            <button style={{borderRadius: `25px`}} onClick={() => {changeBorderRadius('25px')}}>Round edge</button>
+                        </div>
+
                 </div>
             )}
             </>

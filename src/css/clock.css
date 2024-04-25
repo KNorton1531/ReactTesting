@@ -19,12 +19,29 @@
     position: fixed;
     z-index: 100;
     background-color: #000000e8;
-    border: 1px solid rgb(204, 204, 204);
     display: flex;
     align-items: center;
     flex-direction: column;
     padding-top: 70px;
     padding: 70px 20px 0 20px;
+    overflow-y: auto;
+}
+
+.settingsContainer::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #000000;
+}
+
+.settingsContainer::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #000000;
+}
+
+.settingsContainer::-webkit-scrollbar-thumb
+{
+	background-color: #ffffff;
 }
 
 .clockWrapper:active{
@@ -71,6 +88,7 @@
 .settingsContainer h3{
     color: #fff;
     align-self: flex-start;
+    margin-bottom: 5px;
 }
 
 .clockCloseSettings{
@@ -101,7 +119,6 @@
 
 .fontOptions {
     width: 100%;
-    background: #fff;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -109,9 +126,33 @@
 }
 
 .fontOptions button{
-    border: solid 1px #000;
-    color: #000;
-    font-size: 1rem;
+    align-items: center;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    fill: #fff;
+    font-family: Inter,sans-serif;
+    font-size: 16px;
     font-weight: normal;
-    padding: 3px 10px;
+    height: 48px;
+    justify-content: center;
+    letter-spacing: -.8px;
+    line-height: 24px;
+    min-width: 140px;
+    outline: 0;
+    padding: 0 17px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.fontOptions button:hover{
+    border-color: rgb(104, 104, 104);
+    color: rgb(192, 192, 192);
+    fill: rgb(192, 192, 192);
 }

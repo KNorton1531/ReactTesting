@@ -95,99 +95,75 @@ const WelcomeBanner = () => {
     if (hour === 0) {
       // Midnight
       mainWelcome = `It's midnight hour${userNameValue}`;
-      subWelcome = "Everything is quieter";
     } else if (hour === 1) {
       // 1 AM
       mainWelcome = `It's the early hours, peaceful isn't it.`;
-      subWelcome = "The quiet hour, perfect for deep thoughts or deep sleep.";
     } else if (hour === 2) {
       // 2 AM
       mainWelcome = `Still quite early${userNameValue}`;
-      subWelcome = "It's really late, time to think about sleep";
     } else if (hour === 3) {
       // 3 AM
       mainWelcome = `Evening${userNameValue}, it's the dead of the night`;
-      subWelcome = "It's the dead of the night";
     } else if (hour === 4) {
       // 4 AM
       mainWelcome = `Quiet before sinrise, everything is still`;
-      subWelcome = "Quiet before sinrise, everything is still";
     } else if (hour === 5) {
       // 5 AM
       mainWelcome = `The sun will be up soon${userNameValue}`;
-      subWelcome = "Early risers are getting up";
     } else if (hour === 6) {
       // 6 AM
       mainWelcome = `Dawn's breaking${userNameValue}`;
-      subWelcome = "Early risers are getting up";
     } else if (hour === 7) {
       // 7 AM
       mainWelcome = `Good morning${userNameValue}. The day is starting`;
-      subWelcome = "The day is starting, breakfast time";
     } else if (hour === 8) {
       // 8 AM
       mainWelcome = `Time to start getting to work${userNameValue}`;
-      subWelcome = "Time to start getting to work";
     } else if (hour === 9) {
       // 9 AM
       mainWelcome = `Good morning${userNameValue}`;
-      subWelcome = "Stil warming up";
     } else if (hour === 10) {
       // 10 AM
       mainWelcome = `Morning's in full swing${userNameValue}`;
-      subWelcome = "Mid-morning - a time for productivity.";
     } else if (hour === 11) {
       // 11 AM
       mainWelcome = `Morning${userNameValue}, almost time for a break.`;
-      subWelcome = "Late morning, almost time for a break.";
     } else if (hour === 12) {
       // Noon
       mainWelcome = `Time for some lunch${userNameValue}?`;
-      subWelcome = "Might be time to look at getting some lunch";
     } else if (hour === 13) {
       // 1 PM
       mainWelcome = `Afternoon${userNameValue}. Well into the day`;
-      subWelcome = "Early afternoon, Well into the day";
     } else if (hour === 14) {
       // 2 PM
-      mainWelcome = `a perfect time for a short break${userNameValue}`;
-      subWelcome = "Mid-afternoon, a perfect time for a short break.";
+      mainWelcome = `A perfect time for a short break${userNameValue}`;
     } else if (hour === 15) {
       // 3 PM
       mainWelcome = `Afternoon${userNameValue}`;
-      subWelcome = "Well into the afternoon";
     } else if (hour === 16) {
       // 4 PM
       mainWelcome = `Almost time to get home and relax${userNameValue}`;
-      subWelcome = "Almost time to get home and relax";
     } else if (hour === 17) {
       // 5 PM
       mainWelcome = `Evening${userNameValue}`;
-      subWelcome = "How's your day gone?";
     } else if (hour === 18) {
       // 6 PM
       mainWelcome = `Evening${userNameValue}. How's your day gone?`;
-      subWelcome = "How's your day gone?";
     } else if (hour === 19) {
       // 7 PM
       mainWelcome = `Perfect time for a chillout${userNameValue}`;
-      subWelcome = "Perfect time for a chillout";
     } else if (hour === 20) {
       // 8 PM
       mainWelcome = `Perfect time for a chillout${userNameValue}`;
-      subWelcome = "Perfect time for a chillout";
     } else if (hour === 21) {
       // 9 PM
       mainWelcome = `It's getting late${userNameValue}`;
-      subWelcome = "It's getting late";
     } else if (hour === 22) {
       // 10 PM
       mainWelcome = `Late evening. Time to start winding down`;
-      subWelcome = "Late evening. Time to start winding down";
     } else if (hour === 23) {
       // 11 PM
       mainWelcome = `Evening${userNameValue}. The perfect time for reflection or rest.`;
-      subWelcome = "Almost midnight. The perfect time for reflection or rest.";
     }
 
     
