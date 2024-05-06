@@ -23,6 +23,25 @@ function Clock({ id }) {
     const [textColor, setTextColor] = useState(localStorage.getItem('clocktextColorStyle') || '#fff');
     const [textShadow, setTextShadow] = useState(localStorage.getItem('clocktextShadowStyle') || '2px 2px #000000');
     const [borderRadius, setBorderRadius] = useState(localStorage.getItem('clockBorderRadius') || '0px');
+    const settingsRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+                setShowSettings(false);
+            }
+        };
+
+        window.addEventListener('click', handleClickOutside);
+        return () => {
+            window.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+    const handleSettingsClick = (event) => {
+        event.stopPropagation();
+        toggleSettings();
+    };
 
 
     useEffect(() => {
@@ -104,14 +123,14 @@ function Clock({ id }) {
                 <p style={{ fontSize: fontSize}}>{currentTime.format('h:mm A')}</p>
                 {showSettingsIcon && (
                     <div className='settingsHoverContainer'>
-                        <FiSettings onClick={toggleSettings} style={{ cursor: 'pointer', color: '#fff'}} />
+                        <FiSettings onClick={handleSettingsClick} /> {/* Settings Icon */}
                     </div>
                 )}
             </div>
         </Draggable>
 
-            {showSettings && (
-                <div className={`settingsContainer ${showSettings ? 'on' : ''}`}>
+        
+                <div className={`settingsContainer ${showSettings ? 'visible' : ''}`} ref={settingsRef}>
                     <div className='exampleClockContainer' style={{ background: backgroundStyle, color: textColor,}}>
                         <p>{currentTime.format('h:mm A')}</p>
                     </div>
@@ -135,7 +154,7 @@ function Clock({ id }) {
                             <button style={{backgroundColor: `#fff`}}  onClick={() => {changeTextColor('#fff')}}></button>
                             <button style={{backgroundColor: `#313131`}}  onClick={() => {changeTextColor('#313131')}}></button>
                             <button style={{backgroundColor: `#5A5A5A`}}  onClick={() => {changeTextColor('#5A5A5A')}}></button>
-                            <button style={{backgroundColor: `#ba1b1d`}}  onClick={() => {changeTextColor('#fff')}}></button>
+                            <button style={{backgroundColor: `#ba1b1d`}}  onClick={() => {changeTextColor('#ba1b1d')}}></button>
                         </div>
 
                     <h3>Font Size</h3>
@@ -160,7 +179,7 @@ function Clock({ id }) {
                         </div>
 
                 </div>
-            )}
+           
             </>
     );
 }

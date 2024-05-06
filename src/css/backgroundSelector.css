@@ -24,16 +24,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: #fff solid 1px;
     width: 40%;
+    cursor: pointer;
 }
 
 .backgroundOption:hover{
-    font-weight: bold;
-}
-
-.backgroundOption:last-child{
-    border: none;
+    outline: solid 3px #ffffff31;
 }
 
 .backgroundOption img{
@@ -46,7 +42,8 @@
 .backgroundButtons{
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid rgb(175, 175, 175);
+    gap: 20px;
+    justify-content: flex-start;
 }
 
 .backgroundHeader{

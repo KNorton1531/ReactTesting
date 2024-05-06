@@ -45,6 +45,7 @@ const WelcomeBanner = () => {
     const hour = currentTime.hour();
     const dayOfWeek = currentTime.format('dddd');
     const currentDate = currentTime.format('DD-MM'); // Formats date as "DD-MM", e.g., "31-10" for October 31st
+    const currentDateFormatted = currentTime.format('dddd MMMM Do');
 
     // General Flags
     const isWeekend = dayOfWeek === "Saturday" || dayOfWeek === "Sunday";
@@ -276,10 +277,10 @@ const WelcomeBanner = () => {
   const { mainWelcome, subWelcome } = getWelcomeMessages();
 
   return (
-    <div className='welcomeContainer'>
+    <div className='welcomeContainer' id='welcomeContainer'>
       <h1>{mainWelcome}</h1>
       <h2>{subWelcome}</h2>
-      <p>{currentTime.format('h:mm A')}</p>
+      <p>{currentTime.format('dddd MMMM Do')}</p>
     </div>
   );
 };

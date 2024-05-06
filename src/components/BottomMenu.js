@@ -27,6 +27,7 @@ const BottomMenu = ({ toggles }) => {
         });
         setVisibility(initialVisibility);
     }, [toggles]);
+    
 
     useEffect(() => {
         if (!hovered) {
@@ -74,7 +75,7 @@ const BottomMenu = ({ toggles }) => {
         localStorage.setItem(`visibility-${id}`, newVisibility.toString());
         updateElementVisibility(id, newVisibility);
     };
-
+    
     const updateElementVisibility = (id, isVisible) => {
         const element = document.getElementById(id);
         if (element) {

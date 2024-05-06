@@ -77,17 +77,20 @@ class GeoCodeFromPostcode extends React.Component {
     const { postcode, showError } = this.state;
     
     return (
+      <>
       <form onSubmit={this.handleSubmit} autoComplete="off">
-              {showError && <div className='postcodeError'>Invalid format. Please make sure to <u><b>not</b></u> add spaces</div>}
-                <input
-                  type='text'
-                  name='postcode'
-                  value={postcode}
-                  onChange={this.handleChange}
-                  placeholder="Enter postcode"
-                />
-                <button type="submit"><FaRegCheckCircle /></button>
-            </form>
+        <input
+          type='text'
+          name='postcode'
+          value={postcode}
+          onChange={this.handleChange}
+          placeholder="Enter postcode"
+        />
+        <button className='postCodeSubmit' type="submit">Save</button>
+      </form>
+
+      {showError && <div className='postcodeError'>Invalid format. Please make sure to <u><b>not</b></u> add spaces</div>}
+      </>
     );
   }
 }

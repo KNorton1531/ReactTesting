@@ -111,18 +111,34 @@
 }
 
 .settingsOverlay{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: #000000e8;
-    height: 91%;
-    width: 100%;
-    border-radius: 3px;
+    top: 0;
+    left: -100%;
+    width: 350px;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    background-color: #000000e8;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px 20px 0 20px;
+    overflow-y: auto;
+    transition: left 0.3s ease; /* Slide transition */
+}
+
+.settingsOverlay.visible {
+    left: -1px; /* Slide in when visible */
 }
 
 .settingsContent{
     padding: 0 20px;
     color: #fff;
+}
+
+.weatherSettingsTitle{
+    text-align: center;
+    font-size: 2rem;
+    margin: 10px 0px;
 }
 
 .colourOptions{
@@ -162,23 +178,61 @@
     margin-top: 5px;
 }
 
-.settingsContent svg{
-    height: 20px;
-    width: 20px;
+.settingsContent h4{
+    margin-bottom: 10px;
 }
 
-.settingsContent svg:hover{
-    fill: #4fff4f;
+svg.clockCloseSettings:hover{
+    transform: rotate(90deg);
 }
 
 .settingsContent form{
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
+}
+
+.settingsContent form input::placeholder{
+    font-size: 1rem;
+}
+
+.settingsContent form input{
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .postcodeError{
-    color: #ff5b5b;
+    color: #ff4141;
+    margin-top: 10px;
+}
+
+.postCodeSubmit {
+    align-items: center;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    fill: #fff;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    justify-content: center;
+    letter-spacing: -.8px;
+    line-height: 24px;
+    outline: 0;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.postCodeSubmit:hover {
+    border-color: rgb(104, 104, 104);
+    color: rgb(192, 192, 192);
+    fill: rgb(192, 192, 192);
 }
 
 
@@ -206,4 +260,21 @@
 
 .postcodeHeader{
     margin: 0 0 10px 0;
+}
+
+.clockCloseSettings{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.clockCloseSettings svg{
+    color: #fff;
+}
+
+.clockCloseSettings svg:hover{ 
+    text-decoration: underline;
 }

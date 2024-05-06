@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Draggable from 'react-draggable';
 import '../css/weather.css';
 import axios from 'axios';  // Add this for making API requests
-import { format, parseISO } from 'date-fns';
 import { TiWeatherCloudy } from "react-icons/ti";
 import WeatherIcon from "./weatherIcons";
-import { WiDaySunny, WiNightClear, WiCloud, WiRain, WiThunderstorm, WiSnow, WiFog, WiRainMix } from 'react-icons/wi';
-import { LiaCloudSunSolid } from "react-icons/lia";
-import { IoIosSnow } from "react-icons/io";
-import { BsCloudRainHeavy } from "react-icons/bs";
 import { FiSettings } from 'react-icons/fi'; // Settings icon from react-icons
 import firebase from '../firebase';
 import GeoCodeFromLocation from './geocode';
+import { IoCloseOutline } from "react-icons/io5";
 
 
 function WeatherApp({ id }) {
-
+    const settingsRef = useRef(null);
     const [coordinates, setCoordinates] = useState({ lat: null, lon: null });
 
     useEffect(() => {
@@ -70,6 +66,24 @@ function WeatherApp({ id }) {
     const changeTextColor = (color) => {
         setTextColor(color);
         localStorage.setItem('textColorStyle', color); // Save text color to local storage
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+                setShowSettings(false);
+            }
+        };
+
+        window.addEventListener('click', handleClickOutside);
+        return () => {
+            window.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+    const handleSettingsClick = (event) => {
+        event.stopPropagation();
+        toggleSettings();
     };
     
 
@@ -166,55 +180,12 @@ function WeatherApp({ id }) {
     
 
     return (
+        <>
         <Draggable position={position} onStop={handleStop} bounds="parent" handle={'.weatherHandle'}>
             <div className='weatherWrapper' id='WeatherApp' style={{ background: backgroundStyle, color: textColor }}>
             <div className='weatherHandle'>
-                    <FiSettings onClick={toggleSettings} /> {/* Settings Icon */}
+                    <FiSettings onClick={handleSettingsClick} /> {/* Settings Icon */}
                 </div>
-
-                {showSettings && (
-                    <div className='settingsOverlay'>
-                        <div className="settingsContent">
-                            <h4>Settings</h4>
-                            <div className="colourOptions">
-                                <button style={{backgroundColor: `#000000fa`}} onClick={() => {changeBackground('#000000d9'); changeTextColor('#fff')}}></button>
-                                <button style={{backgroundColor: `#f8f9fa`}} onClick={() => {changeBackground('#f8f9faEd'); changeTextColor('#242424')}}></button>
-                                <button style={{backgroundColor: `#5B616A`}}  onClick={() => {changeBackground('#5B616AED'); changeTextColor('#fff')}}></button>
-                                <button style={{backgroundColor: `#57C2A8`}}  onClick={() => {changeBackground('#57C2A8ed'); changeTextColor('#fff')}}></button>
-                                <button style={{backgroundColor: `#ffba49`}}  onClick={() => {changeBackground('#ffba49ed'); changeTextColor('#fff')}}></button>
-                                <button style={{backgroundColor: `#00B3D7`}}  onClick={() => {changeBackground('#00B3D7ed'); changeTextColor('#fff')}}></button>
-                                <button style={{backgroundColor: `#a06cd5`}}  onClick={() => {changeBackground('#a06cd5ed'); changeTextColor('#fff')}}></button>
-                                <button style={{backgroundColor: `#ba1b1d`}}  onClick={() => {changeBackground('#ba1b1ded'); changeTextColor('#fff')}}></button>
-                            </div>
-                            <div className="colourOptions">
-                                <button style={{background: `linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,0.90) 100%)')}></button>
-
-                                <button style={{background: `linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,0.90) 100%)')}></button>
-
-                                <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,0.90) 100%)')}></button>
-
-                                <button style={{background: `linear-gradient(0deg, rgba(181,61,255,1) 0%, rgba(145,255,152,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(181,61,255,1) 0%, rgba(145,255,152,1) 100%)')}></button>
-
-                                <button style={{background: 'lightblue url("https://t4.ftcdn.net/jpg/04/61/23/23/360_F_461232389_XCYvca9n9P437nm3FrCsEIapG4SrhufP.jpg") no-repeat fixed center'}}
-                                    onClick={() => {
-                                        changeBackground('lightblue url("https://t4.ftcdn.net/jpg/04/61/23/23/360_F_461232389_XCYvca9n9P437nm3FrCsEIapG4SrhufP.jpg") no-repeat fixed center');
-                                        changeTextColor('#242424');
-                                    }}>
-                                </button>
-
-                            </div>
-
-                            <div className="colourOptions">
-                                <button style={{backgroundColor: '#242424'}} onClick={() => changeTextColor('#242424')}>Aa</button>
-                                <button style={{backgroundColor: '#ffffff', color: "#000"}} onClick={() => changeTextColor('#ffffff')}>Aa</button>
-                            
-                            </div>
-
-                            <h4 className='postcodeHeader'>Enter UK Postcode</h4>
-                            <GeoCodeFromLocation></GeoCodeFromLocation>
-                        </div>
-                    </div>
-                )}
 
             {currentWeather ? (
                
@@ -267,8 +238,54 @@ function WeatherApp({ id }) {
             ) : ''}
             </div>
 
-
         </Draggable>
+
+
+            <div className={`settingsOverlay ${showSettings ? 'visible' : ''}`}>
+                <div className="settingsContent" ref={settingsRef}>
+                    <IoCloseOutline className='clockCloseSettings' onClick={toggleSettings} style={{ cursor: 'pointer', color: '#fff'}} />
+                    <h4 className='weatherSettingsTitle'>Weather Settings</h4>
+
+                    <h4>Background Colour</h4>
+                    <div className="colourOptions">
+                        <button style={{backgroundColor: `#000000fa`}} onClick={() => {changeBackground('#000000d9'); changeTextColor('#fff')}}></button>
+                        <button style={{backgroundColor: `#f8f9fa`}} onClick={() => {changeBackground('#f8f9faEd'); changeTextColor('#242424')}}></button>
+                        <button style={{backgroundColor: `#5B616A`}}  onClick={() => {changeBackground('#5B616AED'); changeTextColor('#fff')}}></button>
+                        <button style={{backgroundColor: `#57C2A8`}}  onClick={() => {changeBackground('#57C2A8ed'); changeTextColor('#fff')}}></button>
+                        <button style={{backgroundColor: `#ffba49`}}  onClick={() => {changeBackground('#ffba49ed'); changeTextColor('#fff')}}></button>
+                        <button style={{backgroundColor: `#00B3D7`}}  onClick={() => {changeBackground('#00B3D7ed'); changeTextColor('#fff')}}></button>
+                        <button style={{backgroundColor: `#a06cd5`}}  onClick={() => {changeBackground('#a06cd5ed'); changeTextColor('#fff')}}></button>
+                        <button style={{backgroundColor: `#ba1b1d`}}  onClick={() => {changeBackground('#ba1b1ded'); changeTextColor('#fff')}}></button>
+
+                        <button style={{background: `linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(0,179,215,1) 0%, rgba(178,240,255,0.90) 100%)')}></button>
+
+                        <button style={{background: `linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(246,135,255,1) 0%, rgba(88,222,255,0.90) 100%)')}></button>
+
+                        <button style={{background: `linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,212,255,0.90) 100%)')}></button>
+
+                        <button style={{background: `linear-gradient(0deg, rgba(181,61,255,1) 0%, rgba(145,255,152,1) 100%)`}} onClick={() => changeBackground('linear-gradient(0deg, rgba(181,61,255,1) 0%, rgba(145,255,152,1) 100%)')}></button>
+
+                        <button style={{background: 'lightblue url("https://t4.ftcdn.net/jpg/04/61/23/23/360_F_461232389_XCYvca9n9P437nm3FrCsEIapG4SrhufP.jpg") no-repeat fixed center'}}
+                            onClick={() => {
+                                changeBackground('lightblue url("https://t4.ftcdn.net/jpg/04/61/23/23/360_F_461232389_XCYvca9n9P437nm3FrCsEIapG4SrhufP.jpg") no-repeat fixed center');
+                                changeTextColor('#242424');
+                            }}>
+                        </button>
+                    </div>
+
+                    <h4>Text Colour</h4>   
+                    <div className="colourOptions">
+                        <button style={{backgroundColor: '#242424'}} onClick={() => changeTextColor('#242424')}>Aa</button>
+                        <button style={{backgroundColor: '#ffffff', color: "#000"}} onClick={() => changeTextColor('#ffffff')}>Aa</button>
+                    
+                    </div>
+
+                    <h4 className='postcodeHeader'>Enter UK Postcode</h4>
+                    <GeoCodeFromLocation></GeoCodeFromLocation>
+                </div>
+            </div>
+
+        </>
     );
 }
 

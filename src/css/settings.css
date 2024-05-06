@@ -1,25 +1,26 @@
 .settingsWrapper{
-    border-radius: 3%;
-    background-color: rgba(240, 240, 240, 0.99);
-    border: 1px solid rgb(175, 175, 175);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 70%;
-    width: 60%;
-    color: #000;
-    padding: 20px;
+    top: 0;
+    left: -1px;
+    width: 40%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    background-color: #000000e8;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0px 20px 0 20px;
     overflow-y: auto;
+    color: #fff;
 }
 
 .settingsWrapper h3{
     margin: 0;
     font-weight: 300;
     font-size: 1.8rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    align-self: center;
+    margin-top: 20px;
+    font-weight: bold;
 }
 
 .settingsWrapper h3 p{
@@ -29,16 +30,17 @@
 }
 
 .settingsLabel {
-    margin: 10px 0 10px 0;
+    margin: 30px 0 5px 0;
     font-weight: bold;
 }
 
 .userDetails{
     border-bottom: 1px solid rgb(175, 175, 175);
     padding: 20px 0;
-    color: #000;
+    color: #ffffff;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .userDetails form{
@@ -57,10 +59,28 @@
 }
 
 .userDetails button{
+    align-items: center;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    fill: #fff;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    justify-content: center;
+    letter-spacing: -.8px;
+    line-height: 24px;
+    outline: 0;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
     margin-left: 20px;
-    border-radius: 3px;
-    padding: 1px 3px;
-    width: 28px;
 }
 
 .userDetails button svg{
@@ -72,22 +92,15 @@
     fill: #009b00;
 }
 
-.userDetails button:hover{
-    font-weight: bold;
-}
-
 .userDetails input{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    width: 55%s;
 }
 
-.userDetails .editButton{
-    border: solid 1px #000;
-    border-radius: 3px;
-    padding: 1px 3px;
-    width: 20px;
-    height: 23px;
-    text-align: center;
-    margin-left: 20px;
+.userDetails .editButton:hover{
+    border-color: rgb(104, 104, 104);
+    color: rgb(192, 192, 192);
+    fill: rgb(192, 192, 192);
 }
 
 .userDetails .editButton svg:hover{
@@ -97,10 +110,6 @@
 .userDetails .editButton svg{
     height: 100%;
     width: 100%;
-}
-
-.userDetails .editButton:hover{
-    font-weight: bold;
 }
 
 .settingsHeader{

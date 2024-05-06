@@ -5,6 +5,7 @@ import { IoMdClose, IoMdCreate } from "react-icons/io"; // Assuming you use Reac
 import { FaRegCheckCircle } from "react-icons/fa";
 import BackgroundSelector from './BackgroundImageSelector'; // Adjust path as necessary
 import GeoCodeFromLocation from './geocode';
+import { IoCloseOutline } from "react-icons/io5";
 
 
 class Settings extends React.Component {
@@ -31,8 +32,12 @@ class Settings extends React.Component {
     if (bottomMenu) {
         const isHidden = bottomMenu.style.display === 'none';
         bottomMenu.style.display = isHidden ? '' : 'none';
+
+        // Update visibility in local storage
+        localStorage.setItem('visibility-Settings', isHidden ? 'true' : 'false');
     }
 }
+
 
   fetchFirstName() {
     const user = firebase.auth().currentUser;
@@ -87,7 +92,7 @@ class Settings extends React.Component {
     
     return (
         <div className='settingsWrapper' id='Settings'>
-            <h3>Preferences<p>Click outside of menu to close</p></h3>
+            <h3>Preferences</h3><IoCloseOutline className='clockCloseSettings' onClick={this.toggleBottomMenuVisibility} style={{ cursor: 'pointer', color: '#fff'}} />
             <div className='userDetails'>
 
             <div className='userDetailsField'>
@@ -95,12 +100,12 @@ class Settings extends React.Component {
                 {isEditing ? (
                   <form onSubmit={this.handleSubmit} autoComplete="off">
                     <input type='text' name='firstName' onChange={this.handleChange}/>
-                    <button type="submit"><FaRegCheckCircle /></button>
+                    <button type="submit">Save</button>
                   </form>
                 ) : (
                   <div className='settingsValueWrapper'>
                     <span className='settingsValue'>{firstName}</span>
-                    <button className='editButton' onClick={this.toggleEdit}><IoMdCreate /></button>
+                    <button className='editButton' onClick={this.toggleEdit}>Edit</button>
                   </div>
                   
                 )}

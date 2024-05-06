@@ -10,21 +10,24 @@
 }
 
 .effectsWrapper{
-    border: solid 1px #fff;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.85);
     color: #fff;
-    gap: 20px;
     position: absolute;
-    border-radius: 5px;
-    overflow: hidden;
+    bottom: 0;
+    right: 0;
     pointer-events: all;
+    transition: opacity 0.5s ease; /* Smooth transition for opacity */
+    opacity: 0.5; /* Initial opacity */
+}
+
+.effectsWrapper.hovered{
+    opacity: 1; /* Opacity when hovered */
 }
 
 .effectCategories{
     padding: 10px;
-    height: 250px;
     overflow: auto;
+    display: flex;
+    gap: 10px;
 }
 
 .effectCategories::-webkit-scrollbar-track
@@ -53,21 +56,22 @@
 }
 
 .rainButtons{
-    display: flex;
-    gap: 20px;
-    font-size: 0.8rem;
-    margin-bottom: 20px;
-}
-
-.rainButtons:last-child{
-    margin-bottom: 0;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .rainButtons button{
-    height: 20px;
-    padding: 2px;
-    border: solid 1px #fff;
-    width: 80px;
+    display: flex;
+}
+
+.rainButtons:last-child{
+}
+
+.rainButtons button{
+    padding: 5px;
+    border: solid 2px #2e2e2e;
+    border-radius: 50%;
+    background-color: #242424a2;
 }
 
 .rainButtons button.active {
