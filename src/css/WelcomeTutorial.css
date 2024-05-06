@@ -3,16 +3,24 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(29, 29, 29, 0.747);
+    background-color: rgba(29, 29, 29, 0.897);
     color: #fff;
-    padding: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
 }
 
-.finishButton{
+.tutorialContainer form{
+    display:  flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.finishButton, .continueButton{
     align-items: center;
     border: 2px solid #fff;
     box-sizing: border-box;
@@ -36,12 +44,76 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    background-color: rgba(7, 7, 7, 0.705);
 }
 
-.finishButton:hover{
+.namePromptLabel{
+    font-size: 2rem;
+    margin: 30px 0;
+}
+
+.continueButton{
+    margin: 20px 0;
+}
+
+.finishButton:hover, .continueButton:hover{
     border-color: rgb(104, 104, 104);
     color: rgb(192, 192, 192);
     fill: rgb(192, 192, 192);
+}
+
+.intro {
+    font-size: 2rem;
+    margin: 0px 0 30px 0;
+}
+
+.appBarDescription {
+    margin: 0;
+    font-size: 3rem;
+}
+
+.appToggleInstructions {
+    margin: 0;
+    font-size: 3rem;
+    margin-bottom: 40px;
+}
+
+.appDragNotice {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.settingsInfo {
+
+    font-size: 2rem;
+    margin: 10px 0;
+    display: flex;
+    align-items: center; /* Aligns text with icons */
+}
+
+.settingsInfo svg{
+    margin: 0 10px 0 10px;
+}
+
+.namePromptLabel {
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+.firstVisitNotice {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* Additional styles for input fields */
+.tutorialContainer input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    font-size: 2rem;
+    width: 45%;
+    background: #ffffff65;
 }
 
 @keyframes fadeIn {
@@ -57,36 +129,64 @@
 
     .tutorialContainer h2 {
         animation: fadeIn 1s ease forwards;
+        font-size: 15vh;
+        margin: 0;
     }
 
     .tutorialContainer p, .tutorialContainer button {
         animation: fadeIn 1s ease forwards;
     }
 
-    .tutorialContainer p:nth-child(2) {
-    animation-delay: 0.5s;  /* Delays the first <p> element */
-    }
 
-    .tutorialContainer p:nth-child(3) {
-    animation-delay: 1s;   /* Delays the second <p> element */
-    }
-
-    .tutorialContainer p:nth-child(4) {
-    animation-delay: 1.5s; /* Delays the third <p> element */
-    }
-
-    .tutorialContainer p:nth-child(5) {
-        animation-delay: 2s; /* Delays the third <p> element */
-        }
-
-    .tutorialContainer button {
-    animation-delay: 2.5s;   /* Delays the button */
-    }
 
     .tutorialContainer h2,
     .tutorialContainer p,
     .tutorialContainer button {
     opacity: 0;
     }
-  
+    
+    @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .tutorialContainer h2 {
+        animation: fadeIn 1s ease forwards;
+        font-size: 15vh;
+        margin: 0;
+      }
+      
+      .tutorialContainer .namePromptLabel,
+      .tutorialContainer .intro,
+      .tutorialContainer .appBarDescription,
+      .tutorialContainer .appToggleInstructions,
+      .tutorialContainer .appDragNotice,
+      .tutorialContainer .settingsInfo,
+      .tutorialContainer .firstVisitNotice {
+        animation: fadeIn 1s ease forwards;
+        opacity: 0; /* Start all p elements as invisible */
+      }
+      
+      /* Specific Delays for each type of paragraph */
+      .tutorialContainer .namePromptLabel { animation-delay: 0.5s; }
+      .tutorialContainer .intro { animation-delay: 1s; }
+      .tutorialContainer .appBarDescription { animation-delay: 3s; }
+      .tutorialContainer .appToggleInstructions { animation-delay: 5s; }
+      .tutorialContainer .appDragNotice { animation-delay: 7s; }
+      .tutorialContainer .settingsInfo { animation-delay: 10s; }
+      .tutorialContainer .continueButton { animation-delay: 13s; }
+      .tutorialContainer .firstVisitNotice { animation-delay: 13.5s; }
+      
+      .tutorialContainer button, .tutorialContainer input[type="text"] {
+        animation: fadeIn 1s ease forwards;
+        animation-delay: 1s; /* Button comes last */
+        opacity: 0;
+      }
+      
   

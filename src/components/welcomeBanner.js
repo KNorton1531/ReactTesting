@@ -107,7 +107,7 @@ const WelcomeBanner = () => {
       mainWelcome = `Evening${userNameValue}, it's the dead of the night`;
     } else if (hour === 4) {
       // 4 AM
-      mainWelcome = `Quiet before sinrise, everything is still`;
+      mainWelcome = `Quiet before sunrise, everything is still`;
     } else if (hour === 5) {
       // 5 AM
       mainWelcome = `The sun will be up soon${userNameValue}`;
