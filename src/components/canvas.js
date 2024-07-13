@@ -7,7 +7,6 @@ import Clock from './clock';
 import Settings from './settings';
 import WelcomeBanner from './welcomeBanner';
 import WeatherApp from './WeatherApp';
-import WelcomeTutorial from './WelcomeTutorial'; // Import the Tutorial component
 import { BiMusic } from "react-icons/bi";
 import { FiYoutube } from "react-icons/fi";
 import { HiOutlinePaintBrush } from "react-icons/hi2";
@@ -74,14 +73,6 @@ const Canvas = () => {
     setBackground(media);
   };
 
-  const [visitedBefore, setVisitedBefore] = useState(false);
-
-  useEffect(() => {
-    const visitedBefore = localStorage.getItem('visitedBefore');
-    if (visitedBefore && visitedBefore !== 'false') {
-      setVisitedBefore(true);
-    }
-  }, []);
 
   return (
     <div className='canvasWrapper'>
@@ -92,7 +83,6 @@ const Canvas = () => {
       ) : (
         <div style={{ backgroundImage: `url(${background.url})`, backgroundSize: 'cover', width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: -1 }}></div>
       )}
-      {!visitedBefore && <WelcomeTutorial />}
       <WelcomeBanner />
       <DraggableTest2 id="second" />
       <DraggableYouTubePlayer id="youtubePlayer"/>
