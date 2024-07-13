@@ -1,7 +1,7 @@
 .settingsWrapper{
     top: 0;
     left: -1px;
-    width: 40%;
+    width: 500px;
     height: 100%;
     position: fixed;
     z-index: 100;
